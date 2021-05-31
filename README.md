@@ -10,7 +10,9 @@
 `1. git init`
 
 `2. git remote add origin https://github.com/DiegohEh/proyecto-.net-ria`
+
 ----------------------------------------------------------------------------
+
 - Para ver los cambios que hiciste:
 `git status`
 
@@ -21,7 +23,7 @@
 `git commit -m "Breve mensaje diciendo que hiciste"`
 
 - Para hacer PUSH
-`git push origin master // Si master no es tu rama entonces cambialo a tu rama`
+`git push origin main // Si main no es tu rama entonces cambialo a tu rama`
 
 - Crear una nueva rama
 `git branch eugenio`
@@ -35,9 +37,9 @@
 - Para Hacer PULL
 `1. git fetch --all`
 
-`2. git pull origin master`
+`2. git pull origin main`
 
 - Si quieres empezar todo desde 0
 `1. git fetch --all`
 
-`2. git reset --hard origin/master`
+`2. git reset --hard origin/main`
