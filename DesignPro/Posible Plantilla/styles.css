@@ -1,0 +1,407 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+html, body, html * {
+  font-family: 'Roboto', sans-serif;
+}
+
+.body-bg {
+    background: rgb(0,0,0);
+    background-image: url('img/bg.jpg');
+    background-size: cover;
+}
+
+.container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: grid;
+	grid-template-columns: 35% auto 35%;
+	grid-template-rows: 26% auto 26%;
+	width: 100vw;
+	height: 100vh;
+    margin-top: -3%;
+}
+
+.container-registro {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: grid;
+	grid-template-columns: 25% auto 25%;
+	grid-template-rows: 16% auto 8.5%;
+	width: 100vw;
+	height: 100vh;
+    margin-top: -3%;
+}
+
+.cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-end: 3;
+    min-width: 100%;
+
+
+}
+
+.logo-redimensionado {
+    width:10%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black ;
+    padding-right: 10px;
+    vertical-align:middle;
+    margin:auto;
+
+}
+
+.hr-bienvenida {
+    width:55%;
+    border: 1px solid rgb(31, 31, 31);
+}
+
+.input-bienvenida {
+    width: 50%;
+    height: 7%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+}
+
+.input-registro {
+    width: 25%;
+    height: 5%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.input-registro-fit {
+    width: 51.7%;
+    height: 5%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.input-registro-fit-pais {
+    width: 52%;
+    height: 6%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.boton-ingreso {
+    height: 7%;
+    margin-top: 3%;
+    color:white;
+    background: rgb(31, 31, 31);
+    border: 3px solid white;
+    border-radius: 20px;
+    width: 50%;
+    cursor:pointer;
+}
+
+.boton-registro {
+    height: 7%;
+    margin-top: 3%;
+    color:black;
+    background: white;
+    border: 3px solid rgb(31, 31, 31);
+    border-radius: 20px;
+    width: 50%;
+    cursor:pointer;
+}
+
+.cambiar-contra {
+    font-size: small;
+    color: black;
+}
+
+::placeholder {
+    color: black;
+
+}
+
+::-ms-input-placeholder {
+    color: black;
+
+}
+
+:-ms-input-placeholder {
+    color: black;
+
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: 10% auto 10%;
+        grid-template-rows: 10% auto 30%;
+        width: 100vw;
+        height: 100vh;
+        margin-top: 10%;
+    }
+
+    .container-registro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: 10% auto 10%;
+        grid-template-rows: 1% auto 30%;
+        width: 100vw;
+        height: 100vh;
+        margin-top: 10%;
+    }
+    
+.cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-end: 3;
+    min-width: 100%;
+
+
+}
+.logo-redimensionado {
+    width:10%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black ;
+    padding-right: 10px;
+    vertical-align:middle;
+    margin:auto;
+
+}
+
+.hr-bienvenida {
+    width:55%;
+    border: 1px solid rgb(31, 31, 31);
+}
+
+.input-bienvenida {
+    width: 90%;
+    height: 10%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 20px;
+}
+
+.input-registro {
+    width: 80%;
+    height: 6%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.input-registro-fit {
+    width: 80%;
+    height: 6%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.input-registro-fit-pais {
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+    width: 81%; height: 7.5%;
+}
+
+.boton-ingreso {
+    height: 10%;
+    margin-top: 3%;
+    color:white;
+    background: rgb(31, 31, 31);
+    border: 3px solid white;
+    border-radius: 20px;
+    width: 90%;
+    cursor:pointer;
+}
+
+.boton-registro {
+    height: 10%;
+    margin-top: 3%;
+    color:black;
+    background: white;
+    border: 3px solid rgb(31, 31, 31);
+    border-radius: 20px;
+    width: 90%;
+    cursor:pointer;
+}
+}
+
+
+
+@media only screen and (min-width:400px) and (max-width:900px) {
+    .container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: 0% auto 0%;
+        grid-template-rows: 0% auto 0%;
+        width: 100vw;
+        height: 100vh;
+        margin-top: 10%;
+    }
+
+    .container-registro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: 0% auto 0%;
+        grid-template-rows: 0% auto 0%;
+        width: 100vw;
+        height: 100vh;
+        margin-top: 10%;
+    }
+    
+.cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 0;
+    grid-column-end: span 3;
+    grid-row-end: 3;
+    min-width: 100%;
+    margin-left:-3%;
+
+
+}
+.logo-redimensionado {
+    width:10%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black ;
+    padding-right: 10px;
+    vertical-align:middle;
+    margin:auto;
+
+}
+
+.hr-bienvenida {
+    width:55%;
+    border: 1px solid rgb(31, 31, 31);
+}
+
+.input-bienvenida {
+    width: 90%;
+    height: 10%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 20px;
+}
+
+.input-registro {
+    width: 80%;
+    height: 6%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.input-registro-fit {
+    width: 80%;
+    height: 6%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+}
+
+.input-registro-fit-pais {
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+    width: 81%; height: 7.5%;
+}
+
+.boton-ingreso {
+    height: 10%;
+    margin-top: 3%;
+    color:white;
+    background: rgb(31, 31, 31);
+    border: 3px solid white;
+    border-radius: 20px;
+    width: 90%;
+    cursor:pointer;
+}
+
+.boton-registro {
+    height: 10%;
+    margin-top: 3%;
+    color:black;
+    background: white;
+    border: 3px solid rgb(31, 31, 31);
+    border-radius: 20px;
+    width: 90%;
+    cursor:pointer;
+}
+}
