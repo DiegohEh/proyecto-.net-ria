@@ -1,0 +1,10 @@
+Lista de páginas
+6 - Página principal
+7 - Manejo de usuarios
+8 - Edición de perfil
+9 - Explorar
+10 - Visualizar proyecto
+13 - Creación de proyecto
+15 - Visualizar perfil
+16 - Ver mensajes
+17 - OPCIONAL: Carga de video
