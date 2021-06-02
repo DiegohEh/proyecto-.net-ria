@@ -47,6 +47,10 @@
 ----------------------------------------------------------------------------
 
 Cambios a realizar en el proyecto: 
+
+- Asegurarse de que su base se llame "BaseArticulos"
+- Asegurarse de que sus tablas tengan los datos necesarios y se llamen "articulos" y "LogArticulos"
+
 - Ir al archivo web.config(2.BackEnd\1.Services\InternalServices\Web.config), y reemplazar con sus datos las siguientes líneas:
 
 `<add name="BdArticulos" connectionString="Initial Catalog=SuNombredeBaseAQUI;Data Source=SuNombredeServidorAQUI;Integrated Security=true"/>`
