@@ -47,13 +47,13 @@
 ----------------------------------------------------------------------------
 
 Cambios a realizar en el proyecto: 
-Ir al archivo web.config(2.BackEnd\1.Services\InternalServices\Web.config), y reemplazar con sus datos las siguientes líneas:
+- Ir al archivo web.config(2.BackEnd\1.Services\InternalServices\Web.config), y reemplazar con sus datos las siguientes líneas:
 
 `<add name="BdArticulos" connectionString="Initial Catalog=SuNombredeBaseAQUI;Data Source=SuNombredeServidorAQUI;Integrated Security=true"/>`
 
 `<add name="TiendaDB" connectionString="metadata=res://*/Database.ModeloBD.csdl|res://*/Database.ModeloBD.ssdl|res://*/Database.ModeloBD.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SuNombredeServidorAQUI;initial catalog=SuNombredeBaseAQUI;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />`
 
-Ir al archivo App.config(3.DataAccess\Persistencia\App.config), y reemplazar con sus datos las siguientes líneas:
+- Ir al archivo App.config(3.DataAccess\Persistencia\App.config), y reemplazar con sus datos las siguientes líneas:
 
 `<add name="TiendaDB" connectionString="metadata=res://*/Database.ModeloBD.csdl|res://*/Database.ModeloBD.ssdl|res://*/Database.ModeloBD.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SuNombredeServidorAQUI;initial catalog=SuNombredeBaseAQUI;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />`
 
