@@ -13,7 +13,6 @@ namespace TiendaShop.Models
 {
     public class ManejadorArticulo
     {
-
         private DTOArticulo MapToDto(Articulo articulo)
         {
             if (articulo == null)
@@ -41,11 +40,6 @@ namespace TiendaShop.Models
             };
         }
 
-        /// <summary>
-        /// Crea un articulo en base de datos
-        /// </summary>
-        /// <param name="articulo"></param>
-        /// <returns></returns>
         public void Create(Articulo articulo)
         {
             ArticuloServices service = new ArticuloServices();
@@ -53,10 +47,6 @@ namespace TiendaShop.Models
             service.Create(this.MapToDto(articulo));
         }
 
-        /// <summary>
-        /// Retorna la lista de todos los articulos disponibles
-        /// </summary>
-        /// <returns></returns>
         public List<Articulo> GetAll()
         {
             ArticuloServices service = new ArticuloServices();
@@ -73,22 +63,13 @@ namespace TiendaShop.Models
             return resultados;
         }
 
-        /// <summary>
-        /// Devuelve el articulo encontrado
-        /// </summary>
-        /// <param name="codigo"> Codigo de articulo a buscar</param>
-        /// <returns></returns>
         public Articulo Get(string codigo)
         {
             ArticuloServices service = new ArticuloServices();
             return this.MapToArticulo(service.Get(codigo));
 
         }
-        /// <summary>
-        /// Devuelve el articulo encontrado
-        /// </summary>
-        /// <param name="id"> Id de articulo a buscar</param>
-        /// <returns></returns>
+
         public Articulo Get(long id)
         {
             ArticuloServices service = new ArticuloServices();
@@ -96,11 +77,6 @@ namespace TiendaShop.Models
 
         }
 
-        /// <summary>
-        /// Actualiza los campos de un articulo
-        /// </summary>
-        /// <param name="articulo"> Articulo modificado, Id requerido</param>
-        /// <returns></returns>
         public void Update(Articulo articulo)
         {
             ArticuloServices service = new ArticuloServices();
@@ -108,18 +84,10 @@ namespace TiendaShop.Models
 
         }
 
-        /// <summary>
-        /// Elimina un articulo en base de datos
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public void Remove(long id)
         {
             ArticuloServices service = new ArticuloServices();
             service.Remove(id);
         }
-
-
-
     }
 }

@@ -132,6 +132,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Comentario.cs" />
+    <Compile Include="Models\Mensaje.cs" />
+    <Compile Include="Models\Proyecto.cs" />
+    <Compile Include="Models\Seccion.cs" />
+    <Compile Include="Models\Valoracion.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Articulo.cs" />
     <Compile Include="Models\ManejadorArticulo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
