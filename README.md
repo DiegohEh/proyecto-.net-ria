@@ -64,3 +64,15 @@ Cambios a realizar en el proyecto:
 
 
 — LUEGO DE REALIZAR ESTO, EL PROYECTO DEBERÍA FUNCIONAR — 
+
+------------------------------------------------------------------------------------------------
+
+Posibles errores:
+
+- «could not find file…\bin\roslyn\csc.exe»
+    - SOLUCIÓN: 
+        - Ir a Herramientas > Administrador de Paquetes NuGet > Consola del Administrador de Paquetes
+        - Ejecutar la siguiente línea:
+            update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform
+        - Esperar a que termine la ejecución.
+        - Ya no debería aparecer el error.
