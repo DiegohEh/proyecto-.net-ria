@@ -1,0 +1,1472 @@
+<<<<<<< HEAD
+=======
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+html { overflow-x: hidden;
+  overflow-y: scroll;
+  min-height: 100%; }
+
+body {
+  background: rgb(0, 0, 0);
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+  padding:0px;
+  margin:0px;
+
+  height: 100%;
+
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 20% auto 5%;
+  width: 100vw;
+  height: 100vh;
+  margin-top: -6%;
+}
+
+.container-bienvenida {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 20% auto 25%;
+  width: 100vw;
+  height: 100vh;
+  margin-top: -5%;
+}
+
+.cuadro-bienvenida {
+  background-color: rgba(202, 202, 202, 0.92);
+  border: transparent;
+  border-radius: 10px;
+  padding: 20px 0 20px 0;
+  font-size: 30px;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-end: 3;
+  min-width: 100%;
+}
+
+.logo-redimensionado {
+  width: 10%;
+  height: auto;
+  margin-left: -40%;
+  border-right: 2px solid black;
+  padding-right: 10px;
+  vertical-align: middle;
+  margin: auto;
+}
+
+.hr-bienvenida {
+  width: 55%;
+  border: 1px solid rgb(31, 31, 31);
+  margin-top: -3%;
+}
+
+.input-datos {
+  width: 16.9em;
+  height: 3em;
+  border: 2px solid rgb(31, 31, 31);
+  border-radius: 7px;
+  text-align: center;
+  outline: none;
+  background: white;
+  margin-bottom: 1%;
+  margin: 0 0.2vw 1%;
+}
+
+.input-datos-fit {
+  width: 35em;
+  height: 3em;
+  border: 2px solid rgb(31, 31, 31);
+  border-radius: 7px;
+  text-align: center;
+  outline: none;
+  background: white;
+  margin-bottom: 1%;
+}
+
+.input-datos-fit-proyecto {
+  width: 35em;
+  height: 3em;
+  border: 2px solid rgb(31, 31, 31);
+  border-radius: 7px;
+  text-align: center;
+  outline: none;
+  background: white;
+  margin-bottom: 1%;
+}
+
+.input-datos-fit-pais {
+  width: 35.5em;
+  height: 3.5em;
+  border: 2px solid rgb(31, 31, 31);
+  border-radius: 7px;
+  text-align: center;
+  outline: none;
+  background: white;
+  margin-bottom: 1%;
+}
+
+.boton-ingreso {
+  height: 7%;
+  margin-top: 3%;
+  color: #ffffff;
+  background: #000000;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  width: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.boton-registro {
+  height: 3.5em;
+  margin-top: 3%;
+  color: #ffffff;
+  background: #000000;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  width: 35em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.boton-registro:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000000;
+}
+
+.cambiar-contra {
+  font-size: small;
+  color: black;
+  padding: 10px;
+}
+
+.categorias {
+  width: 30em;
+  margin-bottom: 10px;
+}
+
+::placeholder {
+  color: black;
+}
+
+::-ms-input-placeholder {
+  color: black;
+}
+
+:-ms-input-placeholder {
+  color: black;
+}
+
+/* ---- Estilos para Perfil de Usuario ---- */
+
+.container-perfil {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 17% 20% auto 17%;
+  grid-template-rows: 20% auto 15%;
+  width: 100vw;
+  height: 100vh;
+  margin-top: -6%;
+}
+
+.cuadro-perfil-foto {
+  background-color: rgba(99, 99, 99, 0.92);
+  border: transparent;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 20px 0 20px 0;
+  font-size: 30px;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-end: 3;
+  min-width: 100%;
+  box-shadow: inset 0px 0px 0px 3px #000000;
+}
+
+.cuadro-perfil {
+  background-color: rgba(202, 202, 202, 0.92);
+  border: transparent;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px 0 20px 0;
+  font-size: 30px;
+  text-align: center;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-end: 3;
+  min-width: 100%;
+  box-shadow: inset 0px 0px 0px 3px #000000;
+}
+
+.boton-navegacion-perfil {
+  height: 3.5em;
+  color: #ffffff;
+  background: #000000;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  width: 17.5em;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0 0.2vw 1%;
+}
+
+.boton-navegacion-perfil:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000000;
+}
+
+.avatar {
+  width: 40%;
+  height: auto;
+  margin-left: -40%;
+  vertical-align: middle;
+  margin: auto;
+}
+
+.alinear-vertical {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* ---- Estilos para Alta de Proyecto ---- */
+
+.container-proyecto {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 22% 20% auto 22%;
+  grid-template-rows: 20% auto 10%;
+  width: 100vw;
+  height: 100vh;
+  margin-top: -4%;
+}
+
+.label-para-input {
+  display:block;
+  font-size: 0.5em;
+  padding-top: 1%;
+}
+
+.hr-proyecto {
+  border: 1px solid #000000;
+  width: 45%;
+  margin-top: -0.01%;
+}
+
+.cuadro-proyecto-foto {
+  background-color: rgba(99, 99, 99, 0.92);
+  border: transparent;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 20px 0 20px 0;
+  font-size: 30px;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-end: 3;
+  min-width: 100%;
+  box-shadow: inset 0px 0px 0px 3px #000000;
+}
+
+.cuadro-proyecto {
+  background-color: rgba(202, 202, 202, 0.92);
+  border: transparent;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px 0 20px 0;
+  font-size: 30px;
+  text-align: center;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-end: 3;
+  min-width: 100%;
+  box-shadow: inset 0px 0px 0px 3px #000000;
+}
+
+.checkbox-categorias li {
+  display: block;
+  float: left;
+  width: 20%;
+  font-size: 0.5em;
+}
+
+.avatar-proyecto {
+  width: 40%;
+  height: auto;
+  margin-left: -40%;
+  vertical-align: middle;
+  margin: auto;
+}
+
+
+/* ---- Estilos para Movil ---- */
+
+@media only screen and (max-width: 768px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    grid-template-rows: 10% auto 30%;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .container-bienvenida {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    grid-template-rows: 1% auto 30%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 10%;
+  }
+
+  .cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-end: 3;
+    min-width: 100%;
+  }
+
+  .container-perfil {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 17% 20% auto 17%;
+    grid-template-rows: 20% auto 15%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: -4%;
+  }
+
+  .cuadro-perfil-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-end: 3;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+
+  .cuadro-perfil {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-end: 3;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+
+  .logo-redimensionado {
+    width: 10%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin: auto;
+  }
+
+  .hr-bienvenida {
+    width: 55%;
+    border: 1px solid rgb(31, 31, 31);
+  }
+
+  .input-bienvenida {
+    width: 90%;
+    height: 10%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 20px;
+  }
+
+  .input-datos {
+    width: 20em;
+    height: 2.5em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+
+  .input-datos-fit {
+    width: 20em;
+    height: 2.5em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+
+  .input-datos-fit-pais {
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+    width: 20.5em;
+    height: 3em;
+  }
+
+  .boton-ingreso {
+    height: 10%;
+    margin-top: 3%;
+    color: white;
+    background: rgb(31, 31, 31);
+    border: 3px solid white;
+    border-radius: 20px;
+    width: 90%;
+    cursor: pointer;
+  }
+
+  .boton-registro {
+    height: 3em;
+    margin-top: 3%;
+    color: #ffffff;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 20em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .boton-registro:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+
+}
+
+@media only screen and (max-width: 1375px) {
+  .container-proyecto {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 22% 20% auto 22%;
+    grid-template-rows: 20% auto 10%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+  
+  .label-para-input {
+    display:block;
+    font-size: 0.5em;
+    padding-top: 1%;
+  }
+  
+  .hr-proyecto {
+    border: 1px solid #000000;
+    width: 45%;
+    margin-top: -0.01%;
+  }
+  
+  .cuadro-proyecto-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  
+  .cuadro-proyecto {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  
+  .checkbox-categorias li {
+    display: block;
+    float: left;
+    width: 20%;
+    font-size: 0.5em;
+  }
+  
+  .input-datos-fit-proyecto {
+    width: 35em;
+    height: 3em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .container-bienvenida {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 0;
+    grid-column-end: span 3;
+    grid-row-end: 3;
+    min-width: 100%;
+  }
+
+  .container-perfil {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 17% 20% auto 17%;
+    grid-template-rows: 20% auto 15%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .cuadro-perfil-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+
+  .cuadro-perfil {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+
+  .logo-redimensionado {
+    width: 10%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin: auto;
+  }
+
+  .hr-bienvenida {
+    width: 600px;
+    border: 1px solid rgb(31, 31, 31);
+  }
+
+  .input-bienvenida {
+    width: 90%;
+    height: 10%;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 20px;
+  }
+
+  .input-datos {
+    width: 25em;
+    height: 3em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+
+  .input-datos-fit {
+    width: 550px;
+    height: 4em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+
+  .input-datos-fit-pais {
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+    width: 550px;
+    height: 4em;
+  }
+
+  .boton-ingreso {
+    height: 10%;
+    margin-top: 3%;
+    color: white;
+    background: rgb(31, 31, 31);
+    border: 3px solid white;
+    border-radius: 20px;
+    width: 90%;
+    cursor: pointer;
+  }
+
+  .boton-registro {
+    height: 4em;
+    margin-top: 3%;
+    color: #ffffff;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 350px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .boton-registro:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+}
+
+@media only screen and (max-width: 855px) {
+  .container-proyecto {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 22% 20% auto 22%;
+    grid-template-rows: 20% auto 10%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+  
+  .label-para-input {
+    display:block;
+    font-size: 0.5em;
+    padding-top: 1%;
+  }
+  
+  .hr-proyecto {
+    border: 1px solid #000000;
+    width: 45%;
+    margin-top: -0.01%;
+  }
+  
+  .cuadro-proyecto-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  
+  .cuadro-proyecto {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  
+  .checkbox-categorias li {
+    display: block;
+    float: left;
+    width: 10%;
+    font-size: 10px;
+  }
+  
+  .input-datos-fit-proyecto {
+    width: 35em;
+    height: 3em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 820px){
+  .input-datos-fit {
+    width: 400px;
+    height: 4em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+  .input-datos-fit-pais {
+    width: 400px;
+    height: 4em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+  .container-proyecto {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 17% 20% auto 17%;
+    grid-template-rows: 80% 20%;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0%;
+  }
+  
+  .label-para-input {
+    display:block;
+    font-size: 0.5em;
+    padding-top: 1%;
+  }
+  
+  .hr-proyecto {
+    border: 1px solid #000000;
+    width: 45%;
+    margin-top: -0.01%;
+  }
+  
+  .cuadro-proyecto-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  
+  .cuadro-proyecto {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+    margin-top: -5%;
+  }
+  
+  .checkbox-categorias li {
+    display: block;
+    float: left;
+    width: 20%;
+    font-size: 0.5em;
+  }
+
+  .categorias {
+    width: 30em;
+    margin-bottom: 10px;
+    height: 7%;
+  }
+
+  .avatar-proyecto {
+    width: 100px;
+    height: 100px;
+    margin-left: -40%;
+    vertical-align: middle;
+    margin: auto;
+  }
+
+}
+
+@media only screen and (min-width: 200px) and (max-width: 485px) {
+
+  .input-datos-fit-proyecto {
+    width: 300px;
+    height: 3em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 7px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+  .categorias {
+    width: 300px;
+    margin-bottom: 10px;
+    height: 7%;
+  }
+
+}
+
+
+@media only screen and (min-width: 401px) and (max-width: 640px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .container-bienvenida {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 0;
+    grid-column-end: span 3;
+    grid-row-end: 3;
+    min-width: 100%;
+  }
+
+  .hr-bienvenida {
+    width: 300px;
+    border: 1px solid rgb(31, 31, 31);
+  }
+  .logo-redimensionado {
+    width: 20%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin: auto;
+  }
+  .container-perfil {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 17% 20% auto 17%;
+    grid-template-rows: 2% 32% 32% auto;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0%;
+  }
+
+  .cuadro-perfil-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    margin-left: -40%;
+    vertical-align: middle;
+    margin: auto;
+  }
+
+  .cuadro-perfil {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+    margin-top: -80px;
+  }
+
+  .input-datos-fit {
+    width: 300px;
+    height: 3em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 0%;
+  }
+  .input-datos-fit-pais {
+    width: 300px;
+    height: 3em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+
+  .boton-registro {
+    height: 4em;
+    margin-top: 3%;
+    color: #ffffff;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 350px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .boton-registro:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+
+  .boton-navegacion-perfil {
+    height: 3.5em;
+    color: #ffffff;
+    background: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 180px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0% 0.2vw 1%;
+  }
+  
+  .boton-navegacion-perfil:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+
+}
+
+@media only screen and (min-width: 370px) and (max-width: 400px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .container-bienvenida {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 0;
+    grid-column-end: span 3;
+    grid-row-end: 3;
+    min-width: 100%;
+  }
+  .avatar {
+    width: 70px;
+    height: 70px;
+    margin-left: -40%;
+    vertical-align: middle;
+    margin: auto;
+  }
+  .container-perfil {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 17% 20% auto 17%;
+    grid-template-rows: 2% 40% 32% auto;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0%;
+  }
+
+  .logo-redimensionado {
+    width: 20%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin: auto;
+  }
+  .cuadro-perfil {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 0px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  .cuadro-perfil-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  .hr-bienvenida {
+    width: 250px;
+    border: 1px solid rgb(31, 31, 31);
+  }
+
+  .input-datos-fit {
+    width: 300px;
+    height: 2.5em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: -1.5%;
+  }
+
+  .boton-registro {
+    height: 4em;
+    margin-top: 3%;
+    color: #ffffff;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 250px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .boton-registro:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+  
+  .cambiar-contra {
+    font-size:12px;
+    color: black;
+    padding: 10px;
+  }
+  .input-datos-fit-pais {
+    width: 300px;
+    height: 2.5em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50 px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+  .boton-navegacion-perfil {
+    height: 2.5em;
+    color: #ffffff;
+    background: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 180px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: -5%;
+  }
+  
+  .boton-navegacion-perfil:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+
+
+}
+
+@media only screen and (min-width: 0px) and (max-width: 369px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .container-bienvenida {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 0% auto 0%;
+    grid-template-rows: 0% auto 0%;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0%;
+  }
+
+  .cuadro-bienvenida {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: 1px transparent;
+    border-radius: 0px;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 0;
+    grid-column-end: span 3;
+    grid-row-end: 3;
+    min-width: 100%;
+  }
+  .avatar {
+    width: 70px;
+    height: 70px;
+    margin-left: -40%;
+    vertical-align: middle;
+    margin: auto;
+  }
+  .container-perfil {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 17% 20% auto 17%;
+    grid-template-rows: 2% 40% 25% auto;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0%;
+  }
+
+
+  .logo-redimensionado {
+    width: 20%;
+    height: auto;
+    margin-left: -40%;
+    border-right: 2px solid black;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin: auto;
+  }
+  .cuadro-perfil {
+    background-color: rgba(202, 202, 202, 0.92);
+    border: transparent;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 0px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  .cuadro-perfil-foto {
+    background-color: rgba(99, 99, 99, 0.92);
+    border: transparent;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    min-width: 100%;
+    box-shadow: inset 0px 0px 0px 3px #000000;
+  }
+  .hr-bienvenida {
+    width: 250px;
+    border: 1px solid rgb(31, 31, 31);
+  }
+
+  .input-datos-fit {
+    width: 300px;
+    height: 2.5em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: -1.5%;
+  }
+
+  .boton-registro {
+    height: 4em;
+    margin-top: 3%;
+    color: #ffffff;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 250px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .boton-registro:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+  
+  .cambiar-contra {
+    font-size:12px;
+    color: black;
+    padding: 10px;
+  }
+  .input-datos-fit-pais {
+    width: 300px;
+    height: 2.5em;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 50 px;
+    text-align: center;
+    outline: none;
+    background: white;
+    margin-bottom: 1%;
+  }
+  .boton-navegacion-perfil {
+    height: 2.5em;
+    color: #ffffff;
+    background: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+    width: 120px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: -5%;
+  }
+  
+  .boton-navegacion-perfil:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+  }
+
+  h2 {
+    font-size: 35px;
+  }
+}
+>>>>>>> plantillas-iniciales
