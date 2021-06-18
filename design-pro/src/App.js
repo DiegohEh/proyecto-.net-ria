@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
-=======
-import { Route, Switch   } from "react-router-dom";
-
-import Registro from "./paginas/Registro";
-import Bienvenida from "./paginas/Bienvenida";
-import Perfil from "./paginas/Perfil";
-import AltaProyecto from "./paginas/AltaProyecto";
->>>>>>> plantillas-iniciales
 
 // Components
 import Navbar from './components/navbar/Navbar';
@@ -17,10 +8,13 @@ import SearchBar from './components/searchBar/SearchBar';
 
 // Pages
 import Home from './components/pages/Home';
+import Registro from "./components/pages/Registro";
+import Bienvenida from "./components/pages/Bienvenida";
+import Perfil from "./components/pages/Perfil";
+import AltaProyecto from "./components/pages/AltaProyecto";
 
 function App() {
   return (
-<<<<<<< HEAD
     <>  
       <Router>
         <Navbar />
@@ -28,27 +22,21 @@ function App() {
         <Switch>
           <Route path='/' exact component={Home} >
           </Route>
+          <Route path="/ingreso" exact>
+          <Bienvenida />
+          </Route>
+          <Route path="/registro">
+          <Registro />
+          </Route>
+          <Route path="/perfil">
+          <Perfil />
+          </Route>
+          <Route path="/altaproyecto">
+          <AltaProyecto />
+          </Route>
         </Switch>
       </Router>
     </>
-=======
-    <div>
-      <Switch>
-        <Route path="/" exact>
-          <Bienvenida />
-        </Route>
-        <Route path="/registro">
-          <Registro />
-        </Route>
-        <Route path="/perfil">
-          <Perfil />
-        </Route>
-        <Route path="/altaproyecto">
-          <AltaProyecto />
-        </Route>
-      </Switch>
-      </div>
->>>>>>> plantillas-iniciales
   );
 }
 
