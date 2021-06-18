@@ -5,13 +5,13 @@ import './App.css';
 // Components
 import Navbar from './components/navbar/Navbar';
 import SearchBar from './components/searchBar/SearchBar';
+import Home from './components/pages/Home';
 
 // Pages
-import Home from './components/pages/Home';
-import Registro from "./components/pages/Registro";
-import Bienvenida from "./components/pages/Bienvenida";
-import Perfil from "./components/pages/Perfil";
-import AltaProyecto from "./components/pages/AltaProyecto";
+import Registro from "./paginas/Registro";
+import Bienvenida from "./paginas/Bienvenida";
+import Perfil from "./paginas/Perfil";
+import AltaProyecto from "./paginas/AltaProyecto";
 
 function App() {
   return (
