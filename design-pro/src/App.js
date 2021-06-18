@@ -23,15 +23,15 @@ function App() {
           <Route path='/' exact component={Home} >
           </Route>
           <Route path="/ingreso" exact>
-          <Bienvenida />
+            <Bienvenida />
           </Route>
           <Route path="/registro">
-          <Registro />
+            <Registro />
           </Route>
           <Route path="/perfil">
-          <Perfil />
+            <Perfil />
           </Route>
-          <Route path="/altaproyecto">
+            <Route path="/altaproyecto">
           <AltaProyecto />
           </Route>
         </Switch>
