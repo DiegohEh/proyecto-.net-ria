@@ -20,7 +20,6 @@ namespace TiendaShop.Services
 
         public HttpResponseMessage PostServices(string method, string jsonData)
         {
-
             try
             {
                 var adress = new Uri($"{_uri}{method}");
@@ -40,7 +39,6 @@ namespace TiendaShop.Services
             try
             {
                 var adress = new Uri($"{_uri}{method}");
-
                 return _client.GetAsync(adress).Result;
             }
             catch (Exception)
@@ -48,8 +46,5 @@ namespace TiendaShop.Services
                 throw;
             }
         }
-
-
-
     }
 }

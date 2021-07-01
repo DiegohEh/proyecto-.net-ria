@@ -10,24 +10,35 @@ namespace Dominio.DataModel
 {
     public class UnitOfWork : IDisposable
     {
-        protected readonly TiendaDB _context;
+        protected readonly designProEntities _context;
 
-        private ArticuloRepository _articuloRepository;
+        private ProyectoRepository _proyectoRepository;
+        private UsuarioRepository _usuarioRepository;
 
-        public ArticuloRepository ArticuloRepository
+        public ProyectoRepository ProyectoRepository
         {
             get
             {
-                if (this._articuloRepository == null)
-                    this._articuloRepository = new ArticuloRepository(this._context);
+                if (this._proyectoRepository == null)
+                    this._proyectoRepository = new ProyectoRepository(this._context);
 
-                return this._articuloRepository;
+                return this._proyectoRepository;
+            }
+        }
+        public UsuarioRepository UsuarioRepository
+        {
+            get
+            {
+                if (this._usuarioRepository == null)
+                    this._usuarioRepository = new UsuarioRepository(this._context);
+
+                return this._usuarioRepository;
             }
         }
 
         public UnitOfWork()
         {
-            this._context = new TiendaDB();
+            this._context = new designProEntities();
         }
 
         public void Dispose()
@@ -39,6 +50,5 @@ namespace Dominio.DataModel
         {
             return this._context.SaveChanges();
         }
-
     }
 }

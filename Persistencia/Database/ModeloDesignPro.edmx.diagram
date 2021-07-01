@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b3ec641abc24fefafbbdee9d961d47b" Name="Diagram1">
+        <EntityTypeShape EntityType="designProModel.categoria" Width="1.5" PointX="3.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.comentario" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.imagen" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.proyecto" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.seccion" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.tag" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.texto" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.usuario" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.video" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.mensaje" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="designProModel.valoracion" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="designProModel.FK_proyecto_categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_comentario_proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_comentario_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_imagen_seccion" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_proyecto_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_seccion_proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_valoracion_proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_texto_seccion" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_video_seccion" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_mensaje_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_mensaje_usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="designProModel.FK_valoracion_usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -9,7 +9,7 @@ namespace TiendaShop.Models
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
-        public string Visitas { get; set; }
+        public int Visitas { get; set; }
         public string RutaImgPortada { get; set; }
         public double? PromedioValoraciones { get; set; }
         public DateTime FechaCreado { get; set; }

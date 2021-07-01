@@ -74,8 +74,5 @@ namespace Dominio.Repositories
 
             this._context.LogArticulos.Add(log);
         }
-
-
-
     }
 }
