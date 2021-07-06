@@ -8,9 +8,10 @@ namespace Common.DataTransferObjects
 {
     public class DTOMensaje
     {
+        public int Id { get; set; }
         public int IdUsuarioEmisor { get; set; }
         public int IdUsuarioReceptor { get; set; }
         public string Contenido { get; set; }
-        public bool Leido { get; set; }
+        public bool? Leido { get; set; }
     }
 }

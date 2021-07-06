@@ -50,19 +50,14 @@ namespace Dominio.General
         {
             using (var uow = new UnitOfWork())
             {
-
                 var lista = uow.UsuarioRepository.GetAll();
-
                 List<DTOUsuario> resultado = new List<DTOUsuario>();
-
                 foreach (var usuario in lista)
                 {
                     resultado.Add(_mapper.MapToObject(usuario));
                 }
-
                 return resultado;
             }
-
         }
 
         public DTOUsuario Get(string email)

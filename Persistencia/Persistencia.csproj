@@ -52,8 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADO.NET\AccesoBase.cs" />
-    <Compile Include="ADO.NET\AccesoBaseArticulos.cs" />
+    <Compile Include="ADO.NET\AccesoBaseSeccion.cs" />
     <Compile Include="ADO.NET\AccesoBaseProyecto.cs" />
+    <Compile Include="ADO.NET\AccesoBaseMensaje.cs" />
     <Compile Include="ADO.NET\AccesoBaseUsuario.cs" />
     <Compile Include="ADO.NET\Constantes\LogAcciones.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaVideo.cs" />
@@ -69,10 +70,6 @@
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaImagen.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaComentario.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaCategoria.cs" />
-    <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaArticulo.cs" />
-    <Compile Include="Database\Articulo.cs">
-      <DependentUpon>ModeloBD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\categoria.cs">
       <DependentUpon>ModeloDesignPro.tt</DependentUpon>
     </Compile>
@@ -82,26 +79,8 @@
     <Compile Include="Database\imagen.cs">
       <DependentUpon>ModeloDesignPro.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\LogArticulos.cs">
-      <DependentUpon>ModeloBD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\mensaje.cs">
       <DependentUpon>ModeloDesignPro.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ModeloBD.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloBD.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ModeloBD.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloBD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ModeloBD.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloBD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\ModeloDesignPro.Context.cs">
       <AutoGen>True</AutoGen>
@@ -151,16 +130,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Database\ModeloBD.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModeloBD.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Database\ModeloBD.edmx.diagram">
-      <DependentUpon>ModeloBD.edmx</DependentUpon>
-    </None>
     <EntityDeploy Include="Database\ModeloDesignPro.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModeloDesignPro.Designer.cs</LastGenOutput>
@@ -171,16 +141,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\ModeloBD.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModeloBD.Context.cs</LastGenOutput>
-      <DependentUpon>ModeloBD.edmx</DependentUpon>
-    </Content>
-    <Content Include="Database\ModeloBD.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloBD.edmx</DependentUpon>
-      <LastGenOutput>ModeloBD.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Database\ModeloDesignPro.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModeloDesignPro.edmx</DependentUpon>
@@ -191,9 +154,6 @@
       <DependentUpon>ModeloDesignPro.edmx</DependentUpon>
       <LastGenOutput>ModeloDesignPro.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

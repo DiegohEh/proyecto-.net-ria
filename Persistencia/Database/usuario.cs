@@ -18,9 +18,9 @@ namespace Persistencia.Database
         public usuario()
         {
             this.comentario = new HashSet<comentario>();
-            this.proyecto = new HashSet<proyecto>();
             this.mensaje = new HashSet<mensaje>();
             this.mensaje1 = new HashSet<mensaje>();
+            this.proyecto = new HashSet<proyecto>();
             this.valoracion = new HashSet<valoracion>();
         }
     
@@ -43,11 +43,11 @@ namespace Persistencia.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comentario> comentario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<proyecto> proyecto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mensaje> mensaje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mensaje> mensaje1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<proyecto> proyecto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<valoracion> valoracion { get; set; }
     }

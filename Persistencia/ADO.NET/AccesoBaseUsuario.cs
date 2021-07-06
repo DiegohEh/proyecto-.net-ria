@@ -98,13 +98,13 @@ namespace Persistencia.ADO.NET
                 {
                     ParameterName = "@visitasTotales",
                     SqlDbType = SqlDbType.Int,
-                    Value = usuario.VisitasTotales
+                    Value = 0
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@promedioValoraciones",
                     SqlDbType = SqlDbType.Float,
-                    Value = usuario.PromedioValoraciones
+                    Value = 0
                 });
                 this.OpenConnetion();
                 command.Transaction = this.GetTransaction();
@@ -116,51 +116,6 @@ namespace Persistencia.ADO.NET
             }
             catch (Exception){throw;}
         }
-        /*public int InsertLog(DTOPersistenciaUsuario usuario, string accion)
-        {
-            string sqlLog = "insert into LogUsuarios(Fecha, Accion, IdUsuario, Codigo, Descripcion, Precio)"
-             + " values (@fecha, @accion, @idUsuario, @codigo, @descripcion, @precio)";
-
-            SqlCommand commandLog = new SqlCommand(sqlLog);
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@fecha",
-                SqlDbType = SqlDbType.DateTime,
-                Value = DateTime.Now
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@accion",
-                SqlDbType = SqlDbType.VarChar,
-                Value = accion
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@idUsuario",
-                SqlDbType = SqlDbType.BigInt,
-                Value = usuario.Id
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@codigo",
-                SqlDbType = SqlDbType.VarChar,
-                Value = usuario.Codigo
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@descripcion",
-                SqlDbType = SqlDbType.VarChar,
-                Value = usuario.Descripcion
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@precio",
-                SqlDbType = SqlDbType.Float,
-                Value = usuario.Precio
-            });
-            commandLog.Transaction = this.GetTransaction();
-            return this.ExecuteNonQuery(commandLog);
-        }*/
 
         public List<DTOPersistenciaUsuario> GetAll()
         {
@@ -251,7 +206,7 @@ namespace Persistencia.ADO.NET
             if (dataReader.Read())
             {
                 usuario = new DTOPersistenciaUsuario();
-                usuario.Id = int.Parse(dataReader["Id"].ToString());
+                usuario.Id = int.Parse(dataReader["id"].ToString());
                 usuario.Email = dataReader["email"].ToString();
                 usuario.Contrasenia = dataReader["contrasenia"].ToString();
                 usuario.Nombre = dataReader["nombre"].ToString();
@@ -270,6 +225,7 @@ namespace Persistencia.ADO.NET
             this.CloseConnection();
             return usuario;
         }
+
         public int Update(DTOPersistenciaUsuario usuario)
         {
             try
@@ -281,6 +237,12 @@ namespace Persistencia.ADO.NET
                 + "where id = @id";
 
                 SqlCommand command = new SqlCommand(sql);
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@id",
+                    SqlDbType = SqlDbType.Int,
+                    Value = usuario.Id
+                });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@contrasenia",
@@ -369,6 +331,23 @@ namespace Persistencia.ADO.NET
             }
             catch (Exception){throw;}
         }
+
+        public int UpdateValoraciones(DTOPersistenciaUsuario usuario)
+        {
+            try
+            {
+                string sql = "update usuario set promedioValoraciones=(select sum(valoracion) from valoracion where idProyecto = " + usuario.Id + ") / (select count(valoracion) from valoracion where idProyecto = " + usuario.Id + ") where id = " + usuario.Id;
+                SqlCommand command = new SqlCommand(sql);
+                this.OpenConnetion();
+                command.Transaction = this.GetTransaction();
+                int result = this.ExecuteNonQuery(command);
+                this.CommitTransaction();
+                this.CloseConnection();
+                return result;
+            }
+            catch (Exception) { throw; }
+        }
+
         public int Remove(int id)
         {
             try

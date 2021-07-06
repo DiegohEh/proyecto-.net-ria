@@ -18,8 +18,8 @@ namespace InternalServices.Controllers
         {
             MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
             return mantenimiento.GetAll();
-
         }
+
         public IHttpActionResult GetByEmail(string email)
         {
             MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
@@ -31,6 +31,7 @@ namespace InternalServices.Controllers
             return Ok(usuario);
 
         }
+
         public IHttpActionResult Get(int id)
         {
             MantenimientoUsuario mantenimiento = new MantenimientoUsuario();

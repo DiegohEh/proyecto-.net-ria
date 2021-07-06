@@ -14,6 +14,7 @@ namespace Persistencia.Database
     
     public partial class mensaje
     {
+        public int id { get; set; }
         public int idUsuarioEmisor { get; set; }
         public int idUsuarioReceptor { get; set; }
         public string contenido { get; set; }

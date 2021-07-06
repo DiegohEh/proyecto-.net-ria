@@ -32,7 +32,7 @@ namespace Persistencia.ADO.NET
                 {
                     ParameterName = "@visitas",
                     SqlDbType = SqlDbType.Int,
-                    Value = proyecto.Visitas
+                    Value = 0
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
@@ -44,7 +44,7 @@ namespace Persistencia.ADO.NET
                 {
                     ParameterName = "@promedioValoraciones",
                     SqlDbType = SqlDbType.Float,
-                    Value = proyecto.PromedioValoraciones
+                    Value = 0
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
@@ -75,51 +75,6 @@ namespace Persistencia.ADO.NET
             }
             catch (Exception){throw;}
         }
-        /*public int InsertLog(DTOPersistenciaProyecto proyecto, string accion)
-        {
-            string sqlLog = "insert into LogProyectos(Fecha, Accion, IdProyecto, Codigo, Descripcion, Precio)"
-             + " values (@fecha, @accion, @idProyecto, @codigo, @descripcion, @precio)";
-
-            SqlCommand commandLog = new SqlCommand(sqlLog);
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@fecha",
-                SqlDbType = SqlDbType.DateTime,
-                Value = DateTime.Now
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@accion",
-                SqlDbType = SqlDbType.VarChar,
-                Value = accion
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@idProyecto",
-                SqlDbType = SqlDbType.BigInt,
-                Value = proyecto.Id
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@codigo",
-                SqlDbType = SqlDbType.VarChar,
-                Value = proyecto.Codigo
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@descripcion",
-                SqlDbType = SqlDbType.VarChar,
-                Value = proyecto.Descripcion
-            });
-            commandLog.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@precio",
-                SqlDbType = SqlDbType.Float,
-                Value = proyecto.Precio
-            });
-            commandLog.Transaction = this.GetTransaction();
-            return this.ExecuteNonQuery(commandLog);
-        }*/
 
         public List<DTOPersistenciaProyecto> GetAll()
         {
@@ -146,15 +101,65 @@ namespace Persistencia.ADO.NET
             return proyectos;
         }
 
-        public DTOPersistenciaProyecto Get(string email)
+        public List<DTOPersistenciaProyecto> GetRecientes()
         {
-            string sql = "select * from proyecto where email = @email";
+            List<DTOPersistenciaProyecto> proyectos = new List<DTOPersistenciaProyecto>();
+            string sql = "select * from proyecto ORDER BY fechaCreado DESC";
+            SqlCommand command = new SqlCommand(sql);
+            this.OpenConnetion();
+            SqlDataReader dataReader = this.ExecuteReader(command);
+            while (dataReader.Read())
+            {
+                proyectos.Add(new DTOPersistenciaProyecto()
+                {
+                    Id = int.Parse(dataReader["id"].ToString()),
+                    Titulo = dataReader["titulo"].ToString(),
+                    Visitas = int.Parse(dataReader["visitas"].ToString()),
+                    RutaImgPortada = dataReader["rutaImgPortada"].ToString(),
+                    PromedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString()),
+                    FechaCreado = DateTime.Parse(dataReader["fechaCreado"].ToString()),
+                    IdCategoria = int.Parse(dataReader["idCategoria"].ToString()),
+                    IdUsuario = int.Parse(dataReader["idUsuario"].ToString()),
+                });
+            }
+            this.CloseConnection();
+            return proyectos;
+        }
+
+        public List<DTOPersistenciaProyecto> GetMayorValorado()
+        {
+            List<DTOPersistenciaProyecto> proyectos = new List<DTOPersistenciaProyecto>();
+            string sql = "select * from proyecto ORDER BY promedioValoraciones DESC";
+            SqlCommand command = new SqlCommand(sql);
+            this.OpenConnetion();
+            SqlDataReader dataReader = this.ExecuteReader(command);
+            while (dataReader.Read())
+            {
+                proyectos.Add(new DTOPersistenciaProyecto()
+                {
+                    Id = int.Parse(dataReader["id"].ToString()),
+                    Titulo = dataReader["titulo"].ToString(),
+                    Visitas = int.Parse(dataReader["visitas"].ToString()),
+                    RutaImgPortada = dataReader["rutaImgPortada"].ToString(),
+                    PromedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString()),
+                    FechaCreado = DateTime.Parse(dataReader["fechaCreado"].ToString()),
+                    IdCategoria = int.Parse(dataReader["idCategoria"].ToString()),
+                    IdUsuario = int.Parse(dataReader["idUsuario"].ToString()),
+                });
+            }
+            this.CloseConnection();
+            return proyectos;
+        }
+
+        public DTOPersistenciaProyecto Get(string titulo)
+        {
+            string sql = "select * from proyecto where titulo = @titulo";
             SqlCommand command = new SqlCommand(sql);
             command.Parameters.Add(new SqlParameter()
             {
-                ParameterName = "@email",
+                ParameterName = "@titulo",
                 SqlDbType = SqlDbType.VarChar,
-                Value = email
+                Value = titulo
             });
             this.OpenConnetion();
             SqlDataReader dataReader = this.ExecuteReader(command);
@@ -208,26 +213,27 @@ namespace Persistencia.ADO.NET
             this.CloseConnection();
             return proyecto;
         }
+
         public int Update(DTOPersistenciaProyecto proyecto)
         {
             try
             {
-                string sql = "update proyecto set titulo = @titulo, visitas = @visitas, rutaImgPortada = @rutaImgPortada, promedioValoraciones = @promedioValoraciones, "
-                + "fechaCreado = @fechaCreado, idCategoria = @idCategoria, idUsuario = @idUsuario"
+                string sql = "update proyecto set titulo = @titulo, rutaImgPortada = @rutaImgPortada,"
+                + "idCategoria = @idCategoria"
                 + "where id = @id";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@titulo",
-                    SqlDbType = SqlDbType.VarChar,
-                    Value = proyecto.Titulo
+                    ParameterName = "@id",
+                    SqlDbType = SqlDbType.Int,
+                    Value = proyecto.Id
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@visitas",
-                    SqlDbType = SqlDbType.Int,
-                    Value = proyecto.Visitas
+                    ParameterName = "@titulo",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = proyecto.Titulo
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
@@ -237,27 +243,9 @@ namespace Persistencia.ADO.NET
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@promedioValoraciones",
-                    SqlDbType = SqlDbType.Float,
-                    Value = proyecto.PromedioValoraciones
-                });
-                command.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@fechaCreado",
-                    SqlDbType = SqlDbType.DateTime,
-                    Value = proyecto.FechaCreado
-                });
-                command.Parameters.Add(new SqlParameter()
-                {
                     ParameterName = "@idCategoria",
                     SqlDbType = SqlDbType.Int,
                     Value = proyecto.IdCategoria
-                });
-                command.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@idUsuario",
-                    SqlDbType = SqlDbType.Int,
-                    Value = proyecto.IdUsuario
                 });
                 this.OpenConnetion();
                 command.Transaction = this.GetTransaction();
@@ -269,6 +257,39 @@ namespace Persistencia.ADO.NET
             }
             catch (Exception){throw;}
         }
+
+        public int UpdateVisitas(DTOPersistenciaProyecto proyecto)
+        {
+            try
+            {
+                string sql = "update proyecto set visitas = visitas+1 where id = " + proyecto.Id;
+                SqlCommand command = new SqlCommand(sql);
+                this.OpenConnetion();
+                command.Transaction = this.GetTransaction();
+                int result = this.ExecuteNonQuery(command);
+                this.CommitTransaction();
+                this.CloseConnection();
+                return result;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public int UpdateValoraciones(DTOPersistenciaProyecto proyecto)
+        {
+            try
+            {
+                string sql = "update proyecto set promedioValoraciones=(select sum(valoracion) from valoracion where idProyecto = " + proyecto.Id + ") / (select count(valoracion) from valoracion where idProyecto = " + proyecto.Id + ") where id = " + proyecto.Id;
+                SqlCommand command = new SqlCommand(sql);
+                this.OpenConnetion();
+                command.Transaction = this.GetTransaction();
+                int result = this.ExecuteNonQuery(command);
+                this.CommitTransaction();
+                this.CloseConnection();
+                return result;
+            }
+            catch (Exception) { throw; }
+        }
+
         public int Remove(int id)
         {
             try

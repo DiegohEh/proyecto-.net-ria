@@ -29,15 +29,13 @@
           <Property Name="idSeccion" Type="int" />
           <Property Name="rutaUrl" Type="text" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'designPro.dbo.mensaje' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="mensaje">
           <Key>
-            <PropertyRef Name="idUsuarioEmisor" />
-            <PropertyRef Name="idUsuarioReceptor" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUsuarioEmisor" Type="int" Nullable="false" />
-          <Property Name="idUsuarioReceptor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuarioReceptor" Type="int" Nullable="false" />
           <Property Name="contenido" Type="text" />
           <Property Name="leido" Type="bit" />
         </EntityType>
@@ -85,11 +83,15 @@ warning 6013: The table/view 'designPro.dbo.sigue' does not have a primary key d
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'designPro.dbo.tagProyecto' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'designPro.dbo.tagProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tagProyecto">
-          <Property Name="idTag" Type="int" />
-          <Property Name="idProyecto" Type="int" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="idTag" />
+            <PropertyRef Name="idProyecto" />
+          </Key>
+          <Property Name="idTag" Type="int" Nullable="false" />
+          <Property Name="idProyecto" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="texto">
           <Key>
             <PropertyRef Name="id" />
@@ -239,12 +241,30 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
         <!--Errors Found During Generation:
 error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but cannot be found.
         <Association Name="FK_sigue_usuario1" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_tagProyecto_proyecto" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_tagProyecto_tag" />-->
+        <Association Name="FK_tagProyecto_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="tagProyecto" Type="Self.tagProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tagProyecto">
+              <PropertyRef Name="idProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tagProyecto_tag">
+          <End Role="tag" Type="Self.tag" Multiplicity="1" />
+          <End Role="tagProyecto" Type="Self.tagProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tagProyecto">
+              <PropertyRef Name="idTag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_texto_seccion">
           <End Role="seccion" Type="Self.seccion" Multiplicity="1" />
           <End Role="texto" Type="Self.texto" Multiplicity="*" />
@@ -328,6 +348,7 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <EntitySet Name="categoria" EntityType="Self.categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comentario" EntityType="Self.comentario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imagen" EntityType="Self.imagen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mensaje" EntityType="Self.mensaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proyecto" EntityType="Self.proyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="seccion" EntityType="Self.seccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -335,13 +356,11 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <EntitySet Name="texto" EntityType="Self.texto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="video" EntityType="Self.video" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="mensaje" EntityType="Self.mensaje" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="tagProyecto" EntityType="Self.tagProyecto" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [mensaje].[idUsuarioEmisor] AS [idUsuarioEmisor], 
-    [mensaje].[idUsuarioReceptor] AS [idUsuarioReceptor], 
-    [mensaje].[contenido] AS [contenido], 
-    [mensaje].[leido] AS [leido]
-    FROM [dbo].[mensaje] AS [mensaje]</DefiningQuery>
+    [tagProyecto].[idTag] AS [idTag], 
+    [tagProyecto].[idProyecto] AS [idProyecto]
+    FROM [dbo].[tagProyecto] AS [tagProyecto]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="valoracion" EntityType="Self.valoracion" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -381,6 +400,14 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <AssociationSet Name="FK_seccion_proyecto" Association="Self.FK_seccion_proyecto">
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="seccion" EntitySet="seccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tagProyecto_proyecto" Association="Self.FK_tagProyecto_proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="tagProyecto" EntitySet="tagProyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tagProyecto_tag" Association="Self.FK_tagProyecto_tag">
+            <End Role="tag" EntitySet="tag" />
+            <End Role="tagProyecto" EntitySet="tagProyecto" />
           </AssociationSet>
           <AssociationSet Name="FK_texto_seccion" Association="Self.FK_texto_seccion">
             <End Role="seccion" EntitySet="seccion" />
@@ -432,6 +459,18 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <Property Name="rutaUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="seccion" Relationship="Self.FK_imagen_seccion" FromRole="imagen" ToRole="seccion" />
         </EntityType>
+        <EntityType Name="mensaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuarioEmisor" Type="Int32" Nullable="false" />
+          <Property Name="idUsuarioReceptor" Type="Int32" Nullable="false" />
+          <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="leido" Type="Boolean" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_mensaje_usuario" FromRole="mensaje" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK_mensaje_usuario1" FromRole="mensaje" ToRole="usuario" />
+        </EntityType>
         <EntityType Name="proyecto">
           <Key>
             <PropertyRef Name="id" />
@@ -449,6 +488,7 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <NavigationProperty Name="usuario" Relationship="Self.FK_proyecto_usuario" FromRole="proyecto" ToRole="usuario" />
           <NavigationProperty Name="seccion" Relationship="Self.FK_seccion_proyecto" FromRole="proyecto" ToRole="seccion" />
           <NavigationProperty Name="valoracion" Relationship="Self.FK_valoracion_proyecto" FromRole="proyecto" ToRole="valoracion" />
+          <NavigationProperty Name="tag" Relationship="Self.tagProyecto" FromRole="proyecto" ToRole="tag" />
         </EntityType>
         <EntityType Name="seccion">
           <Key>
@@ -477,6 +517,7 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="proyecto" Relationship="Self.tagProyecto" FromRole="tag" ToRole="proyecto" />
         </EntityType>
         <EntityType Name="texto">
           <Key>
@@ -507,9 +548,9 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <Property Name="visitasTotales" Type="Int32" />
           <Property Name="promedioValoraciones" Type="Double" />
           <NavigationProperty Name="comentario" Relationship="Self.FK_comentario_usuario" FromRole="usuario" ToRole="comentario" />
-          <NavigationProperty Name="proyecto" Relationship="Self.FK_proyecto_usuario" FromRole="usuario" ToRole="proyecto" />
           <NavigationProperty Name="mensaje" Relationship="Self.FK_mensaje_usuario" FromRole="usuario" ToRole="mensaje" />
           <NavigationProperty Name="mensaje1" Relationship="Self.FK_mensaje_usuario1" FromRole="usuario" ToRole="mensaje" />
+          <NavigationProperty Name="proyecto" Relationship="Self.FK_proyecto_usuario" FromRole="usuario" ToRole="proyecto" />
           <NavigationProperty Name="valoracion" Relationship="Self.FK_valoracion_usuario" FromRole="usuario" ToRole="valoracion" />
         </EntityType>
         <EntityType Name="video">
@@ -520,18 +561,6 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <Property Name="idSeccion" Type="Int32" />
           <Property Name="rutaUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="seccion" Relationship="Self.FK_video_seccion" FromRole="video" ToRole="seccion" />
-        </EntityType>
-        <EntityType Name="mensaje">
-          <Key>
-            <PropertyRef Name="idUsuarioEmisor" />
-            <PropertyRef Name="idUsuarioReceptor" />
-          </Key>
-          <Property Name="idUsuarioEmisor" Type="Int32" Nullable="false" />
-          <Property Name="idUsuarioReceptor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="leido" Type="Boolean" />
-          <NavigationProperty Name="usuario" Relationship="Self.FK_mensaje_usuario" FromRole="mensaje" ToRole="usuario" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK_mensaje_usuario1" FromRole="mensaje" ToRole="usuario" />
         </EntityType>
         <EntityType Name="valoracion">
           <Key>
@@ -589,6 +618,30 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
             </Principal>
             <Dependent Role="imagen">
               <PropertyRef Name="idSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mensaje_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="mensaje" Type="Self.mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="mensaje">
+              <PropertyRef Name="idUsuarioEmisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mensaje_usuario1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="mensaje" Type="Self.mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="mensaje">
+              <PropertyRef Name="idUsuarioReceptor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -652,30 +705,6 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_mensaje_usuario">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
-          <End Role="mensaje" Type="Self.mensaje" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="mensaje">
-              <PropertyRef Name="idUsuarioEmisor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_mensaje_usuario1">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
-          <End Role="mensaje" Type="Self.mensaje" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="mensaje">
-              <PropertyRef Name="idUsuarioReceptor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_valoracion_usuario">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="valoracion" Type="Self.valoracion" Multiplicity="*" />
@@ -688,10 +717,15 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="tagProyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+          <End Role="tag" Type="Self.tag" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="designProEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="categoria" EntityType="Self.categoria" />
           <EntitySet Name="comentario" EntityType="Self.comentario" />
           <EntitySet Name="imagen" EntityType="Self.imagen" />
+          <EntitySet Name="mensaje" EntityType="Self.mensaje" />
           <EntitySet Name="proyecto" EntityType="Self.proyecto" />
           <EntitySet Name="seccion" EntityType="Self.seccion" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -699,7 +733,6 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <EntitySet Name="texto" EntityType="Self.texto" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="video" EntityType="Self.video" />
-          <EntitySet Name="mensaje" EntityType="Self.mensaje" />
           <EntitySet Name="valoracion" EntityType="Self.valoracion" />
           <AssociationSet Name="FK_proyecto_categoria" Association="Self.FK_proyecto_categoria">
             <End Role="categoria" EntitySet="categoria" />
@@ -716,6 +749,14 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
           <AssociationSet Name="FK_imagen_seccion" Association="Self.FK_imagen_seccion">
             <End Role="seccion" EntitySet="seccion" />
             <End Role="imagen" EntitySet="imagen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mensaje_usuario" Association="Self.FK_mensaje_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="mensaje" EntitySet="mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mensaje_usuario1" Association="Self.FK_mensaje_usuario1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="mensaje" EntitySet="mensaje" />
           </AssociationSet>
           <AssociationSet Name="FK_proyecto_usuario" Association="Self.FK_proyecto_usuario">
             <End Role="usuario" EntitySet="usuario" />
@@ -737,17 +778,13 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
             <End Role="seccion" EntitySet="seccion" />
             <End Role="video" EntitySet="video" />
           </AssociationSet>
-          <AssociationSet Name="FK_mensaje_usuario" Association="Self.FK_mensaje_usuario">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="mensaje" EntitySet="mensaje" />
-          </AssociationSet>
-          <AssociationSet Name="FK_mensaje_usuario1" Association="Self.FK_mensaje_usuario1">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="mensaje" EntitySet="mensaje" />
-          </AssociationSet>
           <AssociationSet Name="FK_valoracion_usuario" Association="Self.FK_valoracion_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="valoracion" EntitySet="valoracion" />
+          </AssociationSet>
+          <AssociationSet Name="tagProyecto" Association="Self.tagProyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="tag" EntitySet="tag" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -821,6 +858,17 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
                 <ScalarProperty Name="rutaUrl" ColumnName="rutaUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mensaje">
+            <EntityTypeMapping TypeName="designProModel.mensaje">
+              <MappingFragment StoreEntitySet="mensaje">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUsuarioEmisor" ColumnName="idUsuarioEmisor" />
+                <ScalarProperty Name="idUsuarioReceptor" ColumnName="idUsuarioReceptor" />
+                <ScalarProperty Name="contenido" ColumnName="contenido" />
+                <ScalarProperty Name="leido" ColumnName="leido" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -904,16 +952,6 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="mensaje">
-            <EntityTypeMapping TypeName="designProModel.mensaje">
-              <MappingFragment StoreEntitySet="mensaje">
-                <ScalarProperty Name="idUsuarioEmisor" ColumnName="idUsuarioEmisor" />
-                <ScalarProperty Name="idUsuarioReceptor" ColumnName="idUsuarioReceptor" />
-                <ScalarProperty Name="contenido" ColumnName="contenido" />
-                <ScalarProperty Name="leido" ColumnName="leido" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="valoracion">
             <EntityTypeMapping TypeName="designProModel.valoracion">
               <MappingFragment StoreEntitySet="valoracion">
@@ -923,6 +961,14 @@ error 6004: The table 'designPro.dbo.tagProyecto' is referenced by a relationshi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="tagProyecto" TypeName="designProModel.tagProyecto" StoreEntitySet="tagProyecto">
+            <EndProperty Name="proyecto">
+              <ScalarProperty Name="id" ColumnName="idProyecto" />
+            </EndProperty>
+            <EndProperty Name="tag">
+              <ScalarProperty Name="id" ColumnName="idTag" />
+            </EndProperty>
+          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="designProModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="designProModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="designProModel.Store.sp_dropdiagram" />

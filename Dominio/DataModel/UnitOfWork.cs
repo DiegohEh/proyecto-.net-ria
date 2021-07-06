@@ -14,6 +14,7 @@ namespace Dominio.DataModel
 
         private ProyectoRepository _proyectoRepository;
         private UsuarioRepository _usuarioRepository;
+        private MensajeRepository _mensajeRepository;
 
         public ProyectoRepository ProyectoRepository
         {
@@ -33,6 +34,17 @@ namespace Dominio.DataModel
                     this._usuarioRepository = new UsuarioRepository(this._context);
 
                 return this._usuarioRepository;
+            }
+        }
+
+        public MensajeRepository MensajeRepository
+        {
+            get
+            {
+                if (this._mensajeRepository == null)
+                    this._mensajeRepository = new MensajeRepository(this._context);
+
+                return this._mensajeRepository;
             }
         }
 

@@ -20,6 +20,7 @@ namespace Persistencia.Database
             this.comentario = new HashSet<comentario>();
             this.seccion = new HashSet<seccion>();
             this.valoracion = new HashSet<valoracion>();
+            this.tag = new HashSet<tag>();
         }
     
         public int id { get; set; }
@@ -39,5 +40,7 @@ namespace Persistencia.Database
         public virtual ICollection<seccion> seccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<valoracion> valoracion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tag> tag { get; set; }
     }
 }

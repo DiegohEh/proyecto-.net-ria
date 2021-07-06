@@ -54,7 +54,6 @@
     <Compile Include="DataTransferObjects\DTOComentario.cs" />
     <Compile Include="DataTransferObjects\DTOProyecto.cs" />
     <Compile Include="DataTransferObjects\DTOUsuario.cs" />
-    <Compile Include="DataTransferObjects\DTOArticulo.cs" />
     <Compile Include="DataTransferObjects\DTOBaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
