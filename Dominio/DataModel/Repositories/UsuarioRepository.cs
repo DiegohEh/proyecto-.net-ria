@@ -20,6 +20,17 @@ namespace Dominio.Repositories
             this._context = context;
         }
 
+        public void Create(usuario usuario)
+        {
+            this._context.usuario.Add(usuario);
+        }
+
+        public List<usuario> GetAll()
+        {
+            return this._context.usuario.Select(a => a).ToList();
+        }
+
+
         public usuario Get(int id)
         {
             return this._context.usuario.FirstOrDefault(a => a.id == id);
@@ -29,16 +40,6 @@ namespace Dominio.Repositories
         public usuario Get(string email)
         {
             return this._context.usuario.FirstOrDefault(a => a.email == email);
-        }
-
-        public List<usuario> GetAll()
-        {
-            return this._context.usuario.Select(a => a).ToList();
-        }
-
-        public void Create(usuario usuario)
-        {
-            this._context.usuario.Add(usuario);
         }
 
         public void Update(usuario usuario)
@@ -59,6 +60,25 @@ namespace Dominio.Repositories
             entity.visitasTotales = usuario.visitasTotales;
             entity.promedioValoraciones = usuario.promedioValoraciones;
             //LogAction(usuario, LogActionsDb.Edicion);
+        }
+
+        public void UpdateValoraciones(usuario usuario)
+        {
+            var entity = this.Get(usuario.id);
+            entity.email = usuario.email;
+            entity.contrasenia = usuario.contrasenia;
+            entity.nombre = usuario.nombre;
+            entity.apellido = usuario.apellido;
+            entity.fechaNac = usuario.fechaNac;
+            entity.pais = usuario.pais;
+            entity.ciudad = usuario.ciudad;
+            entity.rutaImgPerfil = usuario.rutaImgPerfil;
+            entity.profesion = usuario.profesion;
+            entity.empresa = usuario.empresa;
+            entity.urlSitioWebProfesional = usuario.urlSitioWebProfesional;
+            entity.descripcionPersonal = usuario.descripcionPersonal;
+            entity.visitasTotales = usuario.visitasTotales;
+            entity.promedioValoraciones = usuario.promedioValoraciones;
         }
 
         public void Remove(int id)

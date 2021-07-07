@@ -12,7 +12,7 @@ namespace TiendaShop.Models
         public int Visitas { get; set; }
         public string RutaImgPortada { get; set; }
         public double? PromedioValoraciones { get; set; }
-        public DateTime FechaCreado { get; set; }
+        public DateTime? FechaCreado { get; set; }
         public int IdCategoria { get; set; }
         public int IdUsuario { get; set; }
     }

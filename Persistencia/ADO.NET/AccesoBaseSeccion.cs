@@ -18,9 +18,9 @@ namespace Persistencia.ADO.NET
             try
             {
                 string sql = "insert into seccion(idProyecto) values (@idProyecto);"
-                           + "insert into imagen(idSeccion, rutaUrl) values ((select IDENT_CURRENT('seccion'), @rutaUrl);"
-                           + "insert into texto(idSeccion, contenido) values ((select IDENT_CURRENT('seccion'), @contenido);"
-                           + "insert into video(idSeccion, rutaUrl) values ((select IDENT_CURRENT('seccion'), @rutaUrl);";
+                           + "insert into imagen(idSeccion, rutaUrl) values ((select IDENT_CURRENT('seccion')), @rutaUrl);"
+                           + "insert into texto(idSeccion, contenido) values ((select IDENT_CURRENT('seccion')), @contenido);"
+                           + "insert into video(idSeccion, rutaUrl) values ((select IDENT_CURRENT('seccion')), @rutaUrl);";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
@@ -84,8 +84,9 @@ namespace Persistencia.ADO.NET
         {
             try
             {
-                string sql = "update seccion,imagen,texto,video set imagen.rutaUrl = imagen@rutaUrl, texto.contenido = texto.@contenido,video.rutaUrl = video@rutaUrl"
-                + "where seccion.id = seccion.@id AND seccion.idProyecto = seccion.@idProyecto";
+                string sql = "update imagen set rutaUrl = @rutaUrl where idSeccion = @id;" +
+                    "update texto set contenido = @contenido where idSeccion = @id;" +
+                    "update video set rutaUrl = @rutaUrl where idSeccion = @id;";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
@@ -93,12 +94,6 @@ namespace Persistencia.ADO.NET
                     ParameterName = "@id",
                     SqlDbType = SqlDbType.Int,
                     Value = seccion.Id
-                });
-                command.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@idProyecto",
-                    SqlDbType = SqlDbType.Int,
-                    Value = seccion.IdProyecto
                 });
                 command.Parameters.Add(new SqlParameter()
                 {

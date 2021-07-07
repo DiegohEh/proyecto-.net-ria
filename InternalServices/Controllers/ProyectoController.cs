@@ -14,35 +14,6 @@ namespace InternalServices.Controllers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public IEnumerable<DTOProyecto> GetAll()
-        {
-            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-            return mantenimiento.GetAll();
-
-        }
-        public IHttpActionResult GetByTitulo(string titulo)
-        {
-            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-            var proyecto = mantenimiento.Get(titulo);
-
-            if (proyecto == null)
-                return NotFound();
-
-            return Ok(proyecto);
-
-        }
-        public IHttpActionResult Get(int id)
-        {
-            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-            var proyecto = mantenimiento.Get(id);
-
-            if (proyecto == null)
-                return NotFound();
-
-            return Ok(proyecto);
-
-        }
-
         [HttpPost]
         public IHttpActionResult Create(DTOProyecto proyecto)
         {
@@ -64,6 +35,48 @@ namespace InternalServices.Controllers
             return Ok(response);
         }
 
+        public IEnumerable<DTOProyecto> GetAll()
+        {
+            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+            return mantenimiento.GetAll();
+        }
+
+        public IEnumerable<DTOProyecto> GetRecientes()
+        {
+            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+            return mantenimiento.GetRecientes();
+        }
+
+        public IEnumerable<DTOProyecto> GetMayorValorado()
+        {
+            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+            return mantenimiento.GetMayorValorado();
+        }
+
+        public IHttpActionResult GetByTitulo(string titulo)
+        {
+            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+            var proyecto = mantenimiento.GetByTitulo(titulo);
+
+            if (proyecto == null)
+                return NotFound();
+
+            return Ok(proyecto);
+
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+            var proyecto = mantenimiento.Get(id);
+
+            if (proyecto == null)
+                return NotFound();
+
+            return Ok(proyecto);
+
+        }
+
         [HttpPost]
         public IHttpActionResult Update(DTOProyecto proyecto)
         {
@@ -80,6 +93,42 @@ namespace InternalServices.Controllers
                 response.Error = ex.ToString();
             }
 
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public IHttpActionResult UpdateVisitas(DTOProyecto proyecto)
+        {
+            DTOBaseResponse response = new DTOBaseResponse();
+            try
+            {
+                MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+                mantenimiento.UpdateVisitas(proyecto);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Error = ex.ToString();
+            }
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public IHttpActionResult UpdateValoraciones(DTOProyecto proyecto)
+        {
+            DTOBaseResponse response = new DTOBaseResponse();
+            try
+            {
+                MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+                mantenimiento.UpdateValoraciones(proyecto);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Error = ex.ToString();
+            }
             return Ok(response);
         }
 

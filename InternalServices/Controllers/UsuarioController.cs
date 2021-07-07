@@ -14,36 +14,6 @@ namespace InternalServices.Controllers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public IEnumerable<DTOUsuario> GetAll()
-        {
-            MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
-            return mantenimiento.GetAll();
-        }
-
-        public IHttpActionResult GetByEmail(string email)
-        {
-            MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
-            var usuario = mantenimiento.Get(email);
-
-            if (usuario == null)
-                return NotFound();
-
-            return Ok(usuario);
-
-        }
-
-        public IHttpActionResult Get(int id)
-        {
-            MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
-            var usuario = mantenimiento.Get(id);
-
-            if (usuario == null)
-                return NotFound();
-
-            return Ok(usuario);
-
-        }
-
         [HttpPost]
         public IHttpActionResult Create(DTOUsuario usuario)
         {
@@ -65,6 +35,35 @@ namespace InternalServices.Controllers
             return Ok(response);
         }
 
+        public IEnumerable<DTOUsuario> GetAll()
+        {
+            MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
+            return mantenimiento.GetAll();
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
+            var usuario = mantenimiento.Get(id);
+
+            if (usuario == null)
+                return NotFound();
+
+            return Ok(usuario);
+        }
+
+        public IHttpActionResult GetByEmail(string email)
+        {
+            MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
+            var usuario = mantenimiento.Get(email);
+
+            if (usuario == null)
+                return NotFound();
+
+            return Ok(usuario);
+
+        }
+
         [HttpPost]
         public IHttpActionResult Update(DTOUsuario usuario)
         {
@@ -80,7 +79,24 @@ namespace InternalServices.Controllers
                 response.Success = false;
                 response.Error = ex.ToString();
             }
+            return Ok(response);
+        }
 
+        [HttpPost]
+        public IHttpActionResult UpdateValoraciones(DTOUsuario usuario)
+        {
+            DTOBaseResponse response = new DTOBaseResponse();
+            try
+            {
+                MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
+                mantenimiento.Update(usuario);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Error = ex.ToString();
+            }
             return Ok(response);
         }
 

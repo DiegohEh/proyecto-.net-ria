@@ -50,26 +50,49 @@ namespace Dominio.General
         {
             using (var uow = new UnitOfWork())
             {
-
                 var lista = uow.ProyectoRepository.GetAll();
-
                 List<DTOProyecto> resultado = new List<DTOProyecto>();
-
                 foreach (var proyecto in lista)
                 {
                     resultado.Add(_mapper.MapToObject(proyecto));
                 }
-
                 return resultado;
             }
-
         }
 
-        public DTOProyecto Get(string codigo)
+        public List<DTOProyecto> GetRecientes()
         {
             using (var uow = new UnitOfWork())
             {
-                return _mapper.MapToObject(uow.ProyectoRepository.Get(codigo));
+                var lista = uow.ProyectoRepository.GetRecientes();
+                List<DTOProyecto> resultado = new List<DTOProyecto>();
+                foreach (var proyecto in lista)
+                {
+                    resultado.Add(_mapper.MapToObject(proyecto));
+                }
+                return resultado;
+            }
+        }
+
+        public List<DTOProyecto> GetMayorValorado()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var lista = uow.ProyectoRepository.GetMayorValorado();
+                List<DTOProyecto> resultado = new List<DTOProyecto>();
+                foreach (var proyecto in lista)
+                {
+                    resultado.Add(_mapper.MapToObject(proyecto));
+                }
+                return resultado;
+            }
+        }
+
+        public DTOProyecto GetByTitulo(string titulo)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                return _mapper.MapToObject(uow.ProyectoRepository.Get(titulo));
             }
         }
 
@@ -92,11 +115,33 @@ namespace Dominio.General
                     uow.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception){throw;}
+        }
+        
+        public void UpdateVisitas(DTOProyecto proyecto)
+        {
+            try
             {
-                throw;
+                using (var uow = new UnitOfWork())
+                {
+                    uow.ProyectoRepository.Update(_mapper.MapToEntity(proyecto));
+                    uow.SaveChanges();
+                }
             }
+            catch (Exception) { throw; }
+        }
 
+        public void UpdateValoraciones(DTOProyecto proyecto)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork())
+                {
+                    uow.ProyectoRepository.Update(_mapper.MapToEntity(proyecto));
+                    uow.SaveChanges();
+                }
+            }
+            catch (Exception) { throw; }
         }
 
         public void Remove(int id)

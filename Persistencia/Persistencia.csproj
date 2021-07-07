@@ -71,88 +71,89 @@
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaComentario.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaCategoria.cs" />
     <Compile Include="Database\categoria.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\comentario.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DesignProModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DesignProModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DesignProModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DesignProModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DesignProModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\imagen.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\mensaje.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ModeloDesignPro.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloDesignPro.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ModeloDesignPro.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ModeloDesignPro.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloDesignPro.edmx</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\proyecto.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\seccion.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagrams.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tag.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\texto.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\usuario.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\valoracion.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\video.cs">
-      <DependentUpon>ModeloDesignPro.tt</DependentUpon>
+      <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="Database\ModeloDesignPro.edmx">
+    <EntityDeploy Include="Database\DesignProModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModeloDesignPro.Designer.cs</LastGenOutput>
+      <LastGenOutput>DesignProModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Database\ModeloDesignPro.edmx.diagram">
-      <DependentUpon>ModeloDesignPro.edmx</DependentUpon>
+    <None Include="Database\DesignProModel.edmx.diagram">
+      <DependentUpon>DesignProModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Database\ModeloDesignPro.Context.tt">
+    <Content Include="Database\DesignProModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloDesignPro.edmx</DependentUpon>
-      <LastGenOutput>ModeloDesignPro.Context.cs</LastGenOutput>
+      <DependentUpon>DesignProModel.edmx</DependentUpon>
+      <LastGenOutput>DesignProModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Database\ModeloDesignPro.tt">
+    <Content Include="Database\DesignProModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloDesignPro.edmx</DependentUpon>
-      <LastGenOutput>ModeloDesignPro.cs</LastGenOutput>
+      <DependentUpon>DesignProModel.edmx</DependentUpon>
+      <LastGenOutput>DesignProModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

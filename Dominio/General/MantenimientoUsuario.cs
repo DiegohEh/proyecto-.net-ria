@@ -40,10 +40,7 @@ namespace Dominio.General
                     uow.SaveChanges();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception){throw;}
         }
 
         public List<DTOUsuario> GetAll()
@@ -60,19 +57,19 @@ namespace Dominio.General
             }
         }
 
-        public DTOUsuario Get(string email)
-        {
-            using (var uow = new UnitOfWork())
-            {
-                return _mapper.MapToObject(uow.UsuarioRepository.Get(email));
-            }
-        }
-
         public DTOUsuario Get(int id)
         {
             using (var uow = new UnitOfWork())
             {
                 return _mapper.MapToObject(uow.UsuarioRepository.Get(id));
+            }
+        }
+
+        public DTOUsuario Get(string email)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                return _mapper.MapToObject(uow.UsuarioRepository.Get(email));
             }
         }
 
@@ -87,11 +84,21 @@ namespace Dominio.General
                     uow.SaveChanges();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception){throw;}
 
+        }
+
+        public void UpdateValoraciones(DTOUsuario usuario)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork())
+                {
+                    uow.UsuarioRepository.Update(_mapper.MapToEntity(usuario));
+                    uow.SaveChanges();
+                }
+            }
+            catch (Exception){throw;}
         }
 
         public void Remove(int id)

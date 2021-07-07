@@ -16,8 +16,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="idProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProyecto" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="contenido" Type="text" />
         </EntityType>
@@ -25,7 +25,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idSeccion" Type="int" />
           <Property Name="rutaUrl" Type="text" />
         </EntityType>
@@ -443,8 +443,8 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="idProyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProyecto" Type="Int32" Nullable="false" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="proyecto" Relationship="Self.FK_comentario_proyecto" FromRole="comentario" ToRole="proyecto" />
@@ -454,7 +454,7 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idSeccion" Type="Int32" />
           <Property Name="rutaUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="seccion" Relationship="Self.FK_imagen_seccion" FromRole="imagen" ToRole="seccion" />

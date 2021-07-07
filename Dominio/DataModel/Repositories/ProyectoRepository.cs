@@ -20,15 +20,9 @@ namespace Dominio.Repositories
             this._context = context;
         }
 
-        public proyecto Get(int id)
+        public void Create(proyecto proyecto)
         {
-            return this._context.proyecto.FirstOrDefault(a => a.id == id);
-
-        }
-
-        public proyecto Get(string titulo)
-        {
-            return this._context.proyecto.FirstOrDefault(a => a.titulo == titulo);
+            this._context.proyecto.Add(proyecto);
         }
 
         public List<proyecto> GetAll()
@@ -36,9 +30,25 @@ namespace Dominio.Repositories
             return this._context.proyecto.Select(a => a).ToList();
         }
 
-        public void Create(proyecto proyecto)
+        public List<proyecto> GetRecientes()
         {
-            this._context.proyecto.Add(proyecto);
+            return this._context.proyecto.Select(a => a).ToList();
+        }
+
+        public List<proyecto> GetMayorValorado()
+        {
+            return this._context.proyecto.Select(a => a).ToList();
+        }
+
+        public proyecto GetByTitulo(string titulo)
+        {
+            return this._context.proyecto.FirstOrDefault(a => a.titulo == titulo);
+        }
+
+        public proyecto Get(int id)
+        {
+            return this._context.proyecto.FirstOrDefault(a => a.id == id);
+
         }
 
         public void Update(proyecto proyecto)
@@ -51,8 +61,30 @@ namespace Dominio.Repositories
             entity.fechaCreado = proyecto.fechaCreado;
             entity.idCategoria = proyecto.idCategoria;
             entity.idUsuario = proyecto.idUsuario;
+        }
 
-            //LogAction(proyecto, LogActionsDb.Edicion);
+        public void UpdateVisitas(proyecto proyecto)
+        {
+            var entity = this.Get(proyecto.id);
+            entity.titulo = proyecto.titulo;
+            entity.visitas = proyecto.visitas;
+            entity.rutaImgPortada = proyecto.rutaImgPortada;
+            entity.promedioValoraciones = proyecto.promedioValoraciones;
+            entity.fechaCreado = proyecto.fechaCreado;
+            entity.idCategoria = proyecto.idCategoria;
+            entity.idUsuario = proyecto.idUsuario;
+        }
+
+        public void UpdateValoraciones(proyecto proyecto)
+        {
+            var entity = this.Get(proyecto.id);
+            entity.titulo = proyecto.titulo;
+            entity.visitas = proyecto.visitas;
+            entity.rutaImgPortada = proyecto.rutaImgPortada;
+            entity.promedioValoraciones = proyecto.promedioValoraciones;
+            entity.fechaCreado = proyecto.fechaCreado;
+            entity.idCategoria = proyecto.idCategoria;
+            entity.idUsuario = proyecto.idUsuario;
         }
 
         public void Remove(int id)
@@ -62,20 +94,5 @@ namespace Dominio.Repositories
 
             //LogAction(entity, LogActionsDb.Eliminacion);
         }
-
-        /*public void LogAction(Proyecto proyecto, string accion)
-        {
-            var log = new LogProyectos()
-            {
-                Accion = accion,
-                Codigo = proyecto.Codigo,
-                Descripcion = proyecto.Descripcion,
-                Fecha = DateTime.Now,
-                IdProyecto = proyecto.Id,
-                Precio = proyecto.Precio
-            };
-
-            this._context.LogProyectos.Add(log);
-        }*/
     }
 }

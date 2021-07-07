@@ -11,6 +11,6 @@ namespace TiendaShop.Models
         public int IdUsuarioEmisor { get; set; }
         public int IdUsuarioReceptor { get; set; }
         public string Contenido { get; set; }
-        public bool Leido { get; set; }
+        public bool? Leido { get; set; }
     }
 }

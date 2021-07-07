@@ -149,42 +149,6 @@ namespace Persistencia.ADO.NET
             return usuarios;
         }
 
-        public DTOPersistenciaUsuario Get(string email)
-        {
-            string sql = "select * from usuario where email = @email";
-            SqlCommand command = new SqlCommand(sql);
-            command.Parameters.Add(new SqlParameter()
-            {
-                ParameterName = "@email",
-                SqlDbType = SqlDbType.VarChar,
-                Value = email
-            });
-            this.OpenConnetion();
-            SqlDataReader dataReader = this.ExecuteReader(command);
-            DTOPersistenciaUsuario usuario = null;
-            if (dataReader.Read())
-            {
-                usuario = new DTOPersistenciaUsuario();
-                usuario.Id = int.Parse(dataReader["Id"].ToString());
-                usuario.Email = dataReader["email"].ToString();
-                usuario.Contrasenia = dataReader["contrasenia"].ToString();
-                usuario.Nombre = dataReader["nombre"].ToString();
-                usuario.Apellido = dataReader["apellido"].ToString();
-                usuario.FechaNac = DateTime.Parse(dataReader["fechaNac"].ToString());
-                usuario.Pais = dataReader["pais"].ToString();
-                usuario.Ciudad = dataReader["ciudad"].ToString();
-                usuario.RutaImgPerfil = dataReader["rutaImgPerfil"].ToString();
-                usuario.Profesion = dataReader["profesion"].ToString();
-                usuario.Empresa = dataReader["empresa"].ToString();
-                usuario.UrlSitioWebProfesional = dataReader["urlSitioWebProfesional"].ToString();
-                usuario.Descripcion = dataReader["descripcionPersonal"].ToString();
-                usuario.VisitasTotales = int.Parse(dataReader["visitasTotales"].ToString());
-                usuario.PromedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString());
-            }
-            this.CloseConnection();
-            return usuario;
-        }
-
         public DTOPersistenciaUsuario Get(int id)
         {
             string sql = "select * from usuario where id = @id";
@@ -207,6 +171,42 @@ namespace Persistencia.ADO.NET
             {
                 usuario = new DTOPersistenciaUsuario();
                 usuario.Id = int.Parse(dataReader["id"].ToString());
+                usuario.Email = dataReader["email"].ToString();
+                usuario.Contrasenia = dataReader["contrasenia"].ToString();
+                usuario.Nombre = dataReader["nombre"].ToString();
+                usuario.Apellido = dataReader["apellido"].ToString();
+                usuario.FechaNac = DateTime.Parse(dataReader["fechaNac"].ToString());
+                usuario.Pais = dataReader["pais"].ToString();
+                usuario.Ciudad = dataReader["ciudad"].ToString();
+                usuario.RutaImgPerfil = dataReader["rutaImgPerfil"].ToString();
+                usuario.Profesion = dataReader["profesion"].ToString();
+                usuario.Empresa = dataReader["empresa"].ToString();
+                usuario.UrlSitioWebProfesional = dataReader["urlSitioWebProfesional"].ToString();
+                usuario.Descripcion = dataReader["descripcionPersonal"].ToString();
+                usuario.VisitasTotales = int.Parse(dataReader["visitasTotales"].ToString());
+                usuario.PromedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString());
+            }
+            this.CloseConnection();
+            return usuario;
+        }
+
+        public DTOPersistenciaUsuario Get(string email)
+        {
+            string sql = "select * from usuario where email = @email";
+            SqlCommand command = new SqlCommand(sql);
+            command.Parameters.Add(new SqlParameter()
+            {
+                ParameterName = "@email",
+                SqlDbType = SqlDbType.VarChar,
+                Value = email
+            });
+            this.OpenConnetion();
+            SqlDataReader dataReader = this.ExecuteReader(command);
+            DTOPersistenciaUsuario usuario = null;
+            if (dataReader.Read())
+            {
+                usuario = new DTOPersistenciaUsuario();
+                usuario.Id = int.Parse(dataReader["Id"].ToString());
                 usuario.Email = dataReader["email"].ToString();
                 usuario.Contrasenia = dataReader["contrasenia"].ToString();
                 usuario.Nombre = dataReader["nombre"].ToString();

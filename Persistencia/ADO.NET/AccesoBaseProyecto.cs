@@ -151,7 +151,7 @@ namespace Persistencia.ADO.NET
             return proyectos;
         }
 
-        public DTOPersistenciaProyecto Get(string titulo)
+        public DTOPersistenciaProyecto GetByTitulo(string titulo)
         {
             string sql = "select * from proyecto where titulo = @titulo";
             SqlCommand command = new SqlCommand(sql);
