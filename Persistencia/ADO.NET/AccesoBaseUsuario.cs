@@ -190,7 +190,7 @@ namespace Persistencia.ADO.NET
             return usuario;
         }
 
-        public DTOPersistenciaUsuario Get(string email)
+        public DTOPersistenciaUsuario GetByEmail(string email)
         {
             string sql = "select * from usuario where email = @email";
             SqlCommand command = new SqlCommand(sql);

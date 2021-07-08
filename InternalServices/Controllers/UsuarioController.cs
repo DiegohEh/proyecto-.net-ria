@@ -55,7 +55,7 @@ namespace InternalServices.Controllers
         public IHttpActionResult GetByEmail(string email)
         {
             MantenimientoUsuario mantenimiento = new MantenimientoUsuario();
-            var usuario = mantenimiento.Get(email);
+            var usuario = mantenimiento.GetByEmail(email);
 
             if (usuario == null)
                 return NotFound();

@@ -9,6 +9,20 @@ namespace TiendaShop.Services
 {
     public class UsuarioServices
     {
+        public void Create(DTOUsuario usuario)
+        {
+            string metodo = $"usuario/Create";
+            var json = new JavaScriptSerializer().Serialize(usuario);
+            ApiService services = new ApiService();
+            var response = services.PostServices(metodo, json);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+
+            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
+            if (!baseResponse.Success)
+                throw new Exception(baseResponse.Error);
+        }
 
         public List<DTOUsuario> GetAll()
         {
@@ -25,13 +39,10 @@ namespace TiendaShop.Services
                 string jsonResponse = response.Content.ReadAsStringAsync().Result;
                 return new JavaScriptSerializer().Deserialize<List<DTOUsuario>>(jsonResponse);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) { throw; }
         }
 
-        public DTOUsuario Get(string email)
+        public DTOUsuario GetByEmail(string email)
         {
             try
             {
@@ -46,11 +57,9 @@ namespace TiendaShop.Services
                 string jsonResponse = response.Content.ReadAsStringAsync().Result;
                 return new JavaScriptSerializer().Deserialize<DTOUsuario>(jsonResponse);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) { throw; }
         }
+
         public DTOUsuario Get(int id)
         {
             try
@@ -72,20 +81,6 @@ namespace TiendaShop.Services
             }
         }
 
-        public void Create(DTOUsuario usuario)
-        {
-            string metodo = $"usuario/Create";
-            var json = new JavaScriptSerializer().Serialize(usuario);
-            ApiService services = new ApiService();
-            var response = services.PostServices(metodo, json);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
-
-            string jsonResponse = response.Content.ReadAsStringAsync().Result;
-            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
-            if (!baseResponse.Success)
-                throw new Exception(baseResponse.Error);
-        }
         public void Update(DTOUsuario usuario)
         {
             string metodo = $"usuario/Update";
@@ -99,6 +94,22 @@ namespace TiendaShop.Services
             if (!baseResponse.Success)
                 throw new Exception(baseResponse.Error);
         }
+
+        // TODO ver si este necesita un endpoint
+        public void UpdateValoraciones(DTOUsuario usuario)
+        {
+            string metodo = $"usuario/UpdateValoraciones";
+            var json = new JavaScriptSerializer().Serialize(usuario);
+            ApiService services = new ApiService();
+            var response = services.PostServices(metodo, json);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
+            if (!baseResponse.Success)
+                throw new Exception(baseResponse.Error);
+        }
+
         public void Remove(int id)
         {
             string metodo = $"usuario/Remove";

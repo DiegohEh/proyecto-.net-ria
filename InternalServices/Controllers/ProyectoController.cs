@@ -150,5 +150,56 @@ namespace InternalServices.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost]
+        public IHttpActionResult CreateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        {
+            DTOBaseResponse response = new DTOBaseResponse();
+            try
+            {
+                MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+                mantenimiento.CreateSeccion(dtoseccion, dtoimagen, dtotexto, dtovideo);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Error = ex.Message;
+
+                logger.Error(ex, "ProyectoController/CreateSeccion");
+            }
+
+            return Ok(response);
+        }
+
+        public IHttpActionResult GetSeccion(int id)
+        {
+            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+            var proyecto = mantenimiento.GetSeccion(id);
+
+            if (proyecto == null)
+                return NotFound();
+
+            return Ok(proyecto);
+        }
+
+        [HttpPost]
+        public IHttpActionResult UpdateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        {
+            DTOBaseResponse response = new DTOBaseResponse();
+            try
+            {
+                MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
+                mantenimiento.UpdateSeccion(dtoseccion, dtoimagen, dtotexto, dtovideo);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Error = ex.ToString();
+            }
+
+            return Ok(response);
+        }
     }
 }

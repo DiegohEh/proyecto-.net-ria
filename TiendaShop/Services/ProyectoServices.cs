@@ -114,10 +114,7 @@ namespace TiendaShop.Services
                 string jsonResponse = response.Content.ReadAsStringAsync().Result;
                 return new JavaScriptSerializer().Deserialize<DTOProyecto>(jsonResponse);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) { throw; }
         }
 
         public void Update(DTOProyecto proyecto)
@@ -128,6 +125,7 @@ namespace TiendaShop.Services
             var response = services.PostServices(metodo, json);
             if (!response.IsSuccessStatusCode)
                 throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+            
             string jsonResponse = response.Content.ReadAsStringAsync().Result;
             DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
             if (!baseResponse.Success)
@@ -172,6 +170,74 @@ namespace TiendaShop.Services
             var json = new JavaScriptSerializer().Serialize(id);
             ApiService services = new ApiService();
             var response = services.PostServices(metodo, json);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+
+            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
+            if (!baseResponse.Success)
+                throw new Exception(baseResponse.Error);
+        }
+
+        public void CreateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        {
+            var list = new List<string>();
+            string metodo = $"proyecto/CreateSeccion";
+            var json = new JavaScriptSerializer().Serialize(dtoseccion);
+            var json1 = new JavaScriptSerializer().Serialize(dtoimagen);
+            var json2 = new JavaScriptSerializer().Serialize(dtotexto);
+            var json3 = new JavaScriptSerializer().Serialize(dtovideo);
+            list.Add(json);
+            list.Add(json1);
+            list.Add(json2);
+            list.Add(json3);
+            string result = string.Join(",", list);
+
+            ApiService services = new ApiService();
+            var response = services.PostServices(metodo, result);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+
+            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
+            if (!baseResponse.Success)
+                throw new Exception(baseResponse.Error);
+        }
+
+        public DTOSeccion GetSeccion(int id)
+        {
+            try
+            {
+                string metodo = $"proyecto/GetSeccion/{id}";
+                ApiService services = new ApiService();
+                var response = services.GetServices(metodo);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+                }
+
+                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                return new JavaScriptSerializer().Deserialize<DTOSeccion>(jsonResponse);
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void UpdateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        {
+            var list = new List<string>();
+            string metodo = $"proyecto/UpdateSeccion";
+            var json = new JavaScriptSerializer().Serialize(dtoseccion);
+            var json1 = new JavaScriptSerializer().Serialize(dtoimagen);
+            var json2 = new JavaScriptSerializer().Serialize(dtotexto);
+            var json3 = new JavaScriptSerializer().Serialize(dtovideo);
+            list.Add(json);
+            list.Add(json1);
+            list.Add(json2);
+            list.Add(json3);
+            string result = string.Join(",", list);
+
+            ApiService services = new ApiService();
+            var response = services.PostServices(metodo, result);
             if (!response.IsSuccessStatusCode)
                 throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
 

@@ -13,7 +13,7 @@ namespace Persistencia.ADO.NET
 {
     public class AccesoBaseSeccion : AccesoBase
     {
-        public int Create(DTOPersistenciaSeccion seccion, DTOPersistenciaImagen imagen, DTOPersistenciaTexto texto, DTOPersistenciaVideo video)
+        public int CreateSeccion(DTOPersistenciaSeccion seccion, DTOPersistenciaImagen imagen, DTOPersistenciaTexto texto, DTOPersistenciaVideo video)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Persistencia.ADO.NET
             catch (Exception){throw;}
         }
 
-        public DTOPersistenciaSeccion Get(int id)
+        public DTOPersistenciaSeccion GetSeccion(int id)
         {
             string sql = "select * from seccion where id = @id";
             SqlCommand command = new SqlCommand(sql);
@@ -80,7 +80,7 @@ namespace Persistencia.ADO.NET
             return seccions;
         }
 
-        public int Update(DTOPersistenciaSeccion seccion, DTOPersistenciaImagen imagen, DTOPersistenciaTexto texto, DTOPersistenciaVideo video)
+        public int UpdateSeccion(DTOPersistenciaSeccion seccion, DTOPersistenciaImagen imagen, DTOPersistenciaTexto texto, DTOPersistenciaVideo video)
         {
             try
             {

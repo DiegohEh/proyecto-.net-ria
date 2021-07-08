@@ -19,19 +19,20 @@ namespace Dominio.Repositories
         {
             this._context = context;
         }
-        
-        public mensaje Get(int id)
-        {
-            return this._context.mensaje.FirstOrDefault(a => a.id == id);
-        }
-        public List<mensaje> GetConversation(int id)
-        {
-            return this._context.mensaje.Select(a => a).ToList();
-        }
 
         public void Create(mensaje mensaje)
         {
             this._context.mensaje.Add(mensaje);
+        }
+
+        public mensaje Get(int id)
+        {
+            return this._context.mensaje.FirstOrDefault(a => a.id == id);
+        }
+
+        public List<mensaje> GetConversation(int id)
+        {
+            return this._context.mensaje.Select(a => a).ToList();
         }
     }
 }

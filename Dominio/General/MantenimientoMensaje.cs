@@ -33,10 +33,7 @@ namespace Dominio.General
                     uow.SaveChanges();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) { throw; }
         }
 
         public List<DTOMensaje> GetConversation(int id)

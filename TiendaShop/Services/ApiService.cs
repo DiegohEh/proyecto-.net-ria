@@ -35,7 +35,6 @@ namespace TiendaShop.Services
 
         public HttpResponseMessage GetServices(string method)
         {
-
             try
             {
                 var adress = new Uri($"{_uri}{method}");

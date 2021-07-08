@@ -8,6 +8,6 @@ namespace TiendaShop.Models
     public class Seccion
     {
         public int Id { get; set; }
-        public int IdProyecto { get; set; }
+        public int? IdProyecto { get; set; }
     }
 }

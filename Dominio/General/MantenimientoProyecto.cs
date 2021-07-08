@@ -15,10 +15,18 @@ namespace Dominio.General
     public class MantenimientoProyecto
     {
         private ProyectoMapper _mapper;
+        private SeccionMapper _mapperSeccion;
+        private ImagenMapper _mapperImagen;
+        private VideoMapper _mapperVideo;
+        private TextoMapper _mapperTexto;
 
         public MantenimientoProyecto()
         {
             _mapper = new ProyectoMapper();
+            _mapperSeccion = new SeccionMapper();
+            _mapperImagen = new ImagenMapper();
+            _mapperVideo = new VideoMapper();
+            _mapperTexto = new TextoMapper();
         }
 
         public void Create(DTOProyecto dtoProyecto)
@@ -28,7 +36,7 @@ namespace Dominio.General
                 using (var uow = new UnitOfWork())
                 {
 
-                    var current = uow.ProyectoRepository.Get(dtoProyecto.Titulo);
+                    var current = uow.ProyectoRepository.GetByTitulo(dtoProyecto.Titulo);
 
                     if (current != null)
                         throw new Exception("Título del Proyecto existente.");
@@ -40,10 +48,7 @@ namespace Dominio.General
                     uow.SaveChanges();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) { throw; }
         }
 
         public List<DTOProyecto> GetAll()
@@ -92,7 +97,7 @@ namespace Dominio.General
         {
             using (var uow = new UnitOfWork())
             {
-                return _mapper.MapToObject(uow.ProyectoRepository.Get(titulo));
+                return _mapper.MapToObject(uow.ProyectoRepository.GetByTitulo(titulo));
             }
         }
 
@@ -159,6 +164,45 @@ namespace Dominio.General
             {
                 throw;
             }
+        }
+
+        public void CreateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork())
+                {
+                    var seccion = _mapperSeccion.MapToEntity(dtoseccion);
+                    var imagen = _mapperImagen.MapToEntity(dtoimagen);
+                    var texto = _mapperTexto.MapToEntity(dtotexto);
+                    var video = _mapperVideo.MapToEntity(dtovideo);
+
+                    uow.ProyectoRepository.CreateSeccion(seccion,imagen,texto,video);
+                    uow.SaveChanges();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        public DTOSeccion GetSeccion(int id)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                return _mapperSeccion.MapToObject(uow.ProyectoRepository.GetSeccion(id));
+            }
+        }
+
+        public void UpdateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork())
+                {
+                    uow.ProyectoRepository.UpdateSeccion(_mapperSeccion.MapToEntity(dtoseccion), _mapperImagen.MapToEntity(dtoimagen), _mapperTexto.MapToEntity(dtotexto), _mapperVideo.MapToEntity(dtovideo));
+                    uow.SaveChanges();
+                }
+            }
+            catch (Exception) { throw; }
         }
     }
 }

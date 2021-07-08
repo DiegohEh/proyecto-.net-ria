@@ -9,7 +9,7 @@ namespace Persistencia.ADO.NET.DataTrasnferObjects
     public class DTOPersistenciaTexto
     {
         public int Id { get; set; }
-        public int IdSeccion { get; set; }
+        public int? IdSeccion { get; set; }
         public string Contenido { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace TiendaShop.Models
     public class Imagen
     {
         public int Id { get; set; }
-        public int IdSeccion { get; set; }
+        public int? IdSeccion { get; set; }
         public string RutaUrl { get; set; }
     }
 }

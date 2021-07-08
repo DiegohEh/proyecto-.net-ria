@@ -94,5 +94,31 @@ namespace Dominio.Repositories
 
             //LogAction(entity, LogActionsDb.Eliminacion);
         }
+
+        public void CreateSeccion(seccion seccion, imagen imagen, texto texto, video video)
+        {
+            this._context.seccion.Add(seccion);
+            this._context.imagen.Add(imagen);
+            this._context.texto.Add(texto);
+            this._context.video.Add(video);
+        }
+
+        public seccion GetSeccion(int id)
+        {
+            return this._context.seccion.FirstOrDefault(a => a.id == id);
+        }
+
+        public void UpdateSeccion(seccion seccion, imagen imagen, texto texto, video video)
+        {
+            var entity = this.GetSeccion(seccion.id);
+
+            entity.idProyecto = seccion.idProyecto;
+            imagen.idSeccion = seccion.id;
+            imagen.rutaUrl = imagen.rutaUrl;
+            texto.idSeccion = seccion.id;
+            texto.contenido = texto.contenido;
+            video.idSeccion = seccion.id;
+            video.rutaUrl = video.rutaUrl;
+        }
     }
 }

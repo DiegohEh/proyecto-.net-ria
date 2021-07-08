@@ -57,6 +57,10 @@
     <Compile Include="General\MantenimientoProyecto.cs" />
     <Compile Include="General\MantenimientoUsuario.cs" />
     <Compile Include="Mappers\MensajeMapper.cs" />
+    <Compile Include="Mappers\TextoMapper.cs" />
+    <Compile Include="Mappers\ImagenMapper.cs" />
+    <Compile Include="Mappers\VideoMapper.cs" />
+    <Compile Include="Mappers\SeccionMapper.cs" />
     <Compile Include="Mappers\ProyectoMapper.cs" />
     <Compile Include="Mappers\UsuarioMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

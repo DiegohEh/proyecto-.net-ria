@@ -28,7 +28,7 @@ namespace Dominio.General
                 using (var uow = new UnitOfWork())
                 {
 
-                    var current = uow.UsuarioRepository.Get(dtoUsuario.Email);
+                    var current = uow.UsuarioRepository.GetByEmail(dtoUsuario.Email);
 
                     if (current != null)
                         throw new Exception("Email de usuario existente.");
@@ -65,11 +65,11 @@ namespace Dominio.General
             }
         }
 
-        public DTOUsuario Get(string email)
+        public DTOUsuario GetByEmail(string email)
         {
             using (var uow = new UnitOfWork())
             {
-                return _mapper.MapToObject(uow.UsuarioRepository.Get(email));
+                return _mapper.MapToObject(uow.UsuarioRepository.GetByEmail(email));
             }
         }
 

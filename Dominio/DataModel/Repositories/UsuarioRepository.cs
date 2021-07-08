@@ -30,14 +30,13 @@ namespace Dominio.Repositories
             return this._context.usuario.Select(a => a).ToList();
         }
 
-
         public usuario Get(int id)
         {
             return this._context.usuario.FirstOrDefault(a => a.id == id);
 
         }
 
-        public usuario Get(string email)
+        public usuario GetByEmail(string email)
         {
             return this._context.usuario.FirstOrDefault(a => a.email == email);
         }
