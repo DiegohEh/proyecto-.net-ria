@@ -15,6 +15,7 @@ namespace Dominio.DataModel
         private ProyectoRepository _proyectoRepository;
         private UsuarioRepository _usuarioRepository;
         private MensajeRepository _mensajeRepository;
+        private ComentarioRepository _comentarioRepository;
         //private SeccionRepository _seccionRepository;
 
         public ProyectoRepository ProyectoRepository
@@ -48,6 +49,17 @@ namespace Dominio.DataModel
                 return this._seccionRepository;
             }
         }*/
+
+        public ComentarioRepository ComentarioRepository
+        {
+            get
+            {
+                if (this._comentarioRepository == null)
+                    this._comentarioRepository = new ComentarioRepository(this._context);
+
+                return this._comentarioRepository;
+            }
+        }
 
         public MensajeRepository MensajeRepository
         {

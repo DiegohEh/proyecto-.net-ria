@@ -55,6 +55,7 @@
     <Compile Include="ADO.NET\AccesoBaseSeccion.cs" />
     <Compile Include="ADO.NET\AccesoBaseProyecto.cs" />
     <Compile Include="ADO.NET\AccesoBaseMensaje.cs" />
+    <Compile Include="ADO.NET\AccesoBaseComentario.cs" />
     <Compile Include="ADO.NET\AccesoBaseUsuario.cs" />
     <Compile Include="ADO.NET\Constantes\LogAcciones.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaVideo.cs" />

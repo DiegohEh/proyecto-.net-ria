@@ -131,6 +131,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManejadorComentario.cs" />
     <Compile Include="Models\ManejadorMensaje.cs" />
     <Compile Include="Models\ManejadorProyecto.cs" />
     <Compile Include="Models\ManejadorUsuario.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiService.cs" />
+    <Compile Include="Services\ComentarioServices.cs" />
     <Compile Include="Services\MensajeServices.cs" />
     <Compile Include="Services\ProyectoServices.cs" />
     <Compile Include="Services\UsuarioServices.cs" />

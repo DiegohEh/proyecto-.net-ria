@@ -49,13 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\DbConstants\LogActionsDb.cs" />
+    <Compile Include="DataModel\Repositories\ComentarioRepository.cs" />
     <Compile Include="DataModel\Repositories\MensajeRepository.cs" />
     <Compile Include="DataModel\Repositories\ProyectoRepository.cs" />
     <Compile Include="DataModel\Repositories\UsuarioRepository.cs" />
     <Compile Include="DataModel\UnitOfWork.cs" />
+    <Compile Include="General\MantenimientoComentario.cs" />
     <Compile Include="General\MantenimientoMensaje.cs" />
     <Compile Include="General\MantenimientoProyecto.cs" />
     <Compile Include="General\MantenimientoUsuario.cs" />
+    <Compile Include="Mappers\ComentarioMapper.cs" />
     <Compile Include="Mappers\MensajeMapper.cs" />
     <Compile Include="Mappers\TextoMapper.cs" />
     <Compile Include="Mappers\ImagenMapper.cs" />
