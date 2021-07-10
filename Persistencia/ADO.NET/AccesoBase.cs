@@ -15,7 +15,7 @@ namespace Persistencia.ADO.NET
 
         private void Connect()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["BdArticulos"].ToString();
+            string connectionString = ConfigurationManager.ConnectionStrings["BaseDeDatos"].ToString();
             _conexion = new SqlConnection(connectionString);
         }
 

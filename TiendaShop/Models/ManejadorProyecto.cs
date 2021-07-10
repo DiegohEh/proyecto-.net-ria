@@ -51,7 +51,6 @@ namespace TiendaShop.Models
         public void Create(Proyecto proyecto)
         {
             ProyectoServices service = new ProyectoServices();
-
             service.Create(this.MapToDto(proyecto));
         }
 
@@ -67,29 +66,25 @@ namespace TiendaShop.Models
             {
                 resultados.Add(this.MapToProyecto(proyecto));
             }
-
             return resultados;
         }
 
-        public Proyecto Get(string codigo)
+        public Proyecto GetByTitulo(string titulo)
         {
             ProyectoServices service = new ProyectoServices();
-            return this.MapToProyecto(service.Get(codigo));
-
+            return this.MapToProyecto(service.GetByTitulo(titulo));
         }
 
         public Proyecto Get(int id)
         {
             ProyectoServices service = new ProyectoServices();
             return this.MapToProyecto(service.Get(id));
-
         }
 
         public void Update(Proyecto proyecto)
         {
             ProyectoServices service = new ProyectoServices();
             service.Update(this.MapToDto(proyecto));
-
         }
 
         public void Remove(int id)

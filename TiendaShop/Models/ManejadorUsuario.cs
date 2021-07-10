@@ -83,10 +83,10 @@ namespace TiendaShop.Models
             return resultados;
         }
 
-        public Usuario Get(string email)
+        public Usuario GetByEmail(string email)
         {
             UsuarioServices service = new UsuarioServices();
-            return this.MapToUsuario(service.Get(email));
+            return this.MapToUsuario(service.GetByEmail(email));
 
         }
 

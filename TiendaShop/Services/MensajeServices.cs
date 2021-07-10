@@ -24,7 +24,7 @@ namespace TiendaShop.Services
                 throw new Exception(baseResponse.Error);
         }
 
-        public List<DTOMensaje> GetConversation()
+        public List<DTOMensaje> GetConversation(int id)
         {
             try
             {
