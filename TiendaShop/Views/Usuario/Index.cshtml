@@ -1,0 +1,111 @@
+﻿@model IEnumerable<DesignProNamespace.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrasenia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RutaImgPerfil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profesion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UrlSitioWebProfesional)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisitasTotales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PromedioValoraciones)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contrasenia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaNac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ciudad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RutaImgPerfil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profesion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UrlSitioWebProfesional)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisitasTotales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PromedioValoraciones)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

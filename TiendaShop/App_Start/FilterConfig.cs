@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace TiendaShop
+namespace DesignProNamespace
 {
     public class FilterConfig
     {

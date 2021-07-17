@@ -15,13 +15,14 @@ namespace InternalServices.Controllers
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [HttpPost]
-        public IHttpActionResult Create(DTOProyecto proyecto)
+        [Route("Proyecto/Create")]
+        public IHttpActionResult Create(DTOProyecto proyecto, DTOTag tags, DTOSeccion seccion)
         {
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
                 MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-                mantenimiento.Create(proyecto);
+                mantenimiento.Create(proyecto, tags, seccion);
                 response.Success = true;
             }
             catch (Exception ex)
@@ -41,40 +42,35 @@ namespace InternalServices.Controllers
             return mantenimiento.GetAll();
         }
 
-        public IEnumerable<DTOProyecto> GetRecientes()
+        [Route("Proyecto/GetBarraDeBusqueda")]
+        public IHttpActionResult GetBarraDeBusqueda(string busqueda)
         {
             MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-            return mantenimiento.GetRecientes();
-        }
-
-        public IEnumerable<DTOProyecto> GetMayorValorado()
-        {
-            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-            return mantenimiento.GetMayorValorado();
+            return Ok(mantenimiento.GetBarraDeBusqueda(busqueda));
         }
 
         public IHttpActionResult GetByTitulo(string titulo)
         {
             MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
             var proyecto = mantenimiento.GetByTitulo(titulo);
+            UpdateVisitas(proyecto);
 
             if (proyecto == null)
                 return NotFound();
 
             return Ok(proyecto);
-
         }
 
         public IHttpActionResult Get(int id)
         {
             MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
             var proyecto = mantenimiento.Get(id);
+            UpdateVisitas(proyecto);
 
             if (proyecto == null)
                 return NotFound();
 
             return Ok(proyecto);
-
         }
 
         [HttpPost]
@@ -115,13 +111,13 @@ namespace InternalServices.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateValoraciones(DTOProyecto proyecto)
+        public IHttpActionResult UpdateValoraciones(DTOValoracion valoracion)
         {
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
                 MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-                mantenimiento.UpdateValoraciones(proyecto);
+                mantenimiento.UpdateValoraciones(valoracion);
                 response.Success = true;
             }
             catch (Exception ex)
@@ -152,13 +148,13 @@ namespace InternalServices.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CreateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        public IHttpActionResult CreateSeccion(DTOSeccion dtoseccion)
         {
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-                mantenimiento.CreateSeccion(dtoseccion, dtoimagen, dtotexto, dtovideo);
+                MantenimientoSeccion mantenimiento = new MantenimientoSeccion();
+                mantenimiento.CreateSeccion(dtoseccion);
                 response.Success = true;
             }
             catch (Exception ex)
@@ -174,23 +170,23 @@ namespace InternalServices.Controllers
 
         public IHttpActionResult GetSeccion(int id)
         {
-            MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-            var proyecto = mantenimiento.GetSeccion(id);
+            MantenimientoSeccion mantenimiento = new MantenimientoSeccion();
+            var seccion = mantenimiento.GetSeccion(id);
 
-            if (proyecto == null)
+            if (seccion == null)
                 return NotFound();
 
-            return Ok(proyecto);
+            return Ok(seccion);
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
+        public IHttpActionResult UpdateSeccion(DTOSeccion dtoseccion)
         {
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                MantenimientoProyecto mantenimiento = new MantenimientoProyecto();
-                mantenimiento.UpdateSeccion(dtoseccion, dtoimagen, dtotexto, dtovideo);
+                MantenimientoSeccion mantenimiento = new MantenimientoSeccion();
+                mantenimiento.UpdateSeccion(dtoseccion);
                 response.Success = true;
             }
             catch (Exception ex)

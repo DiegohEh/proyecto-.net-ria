@@ -14,23 +14,12 @@ namespace Persistencia.Database
     
     public partial class seccion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public seccion()
-        {
-            this.imagen = new HashSet<imagen>();
-            this.texto = new HashSet<texto>();
-            this.video = new HashSet<video>();
-        }
-    
         public int id { get; set; }
         public Nullable<int> idProyecto { get; set; }
+        public string contenidoTexto { get; set; }
+        public string rutaUrlImagen { get; set; }
+        public string rutaUrlVideo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imagen> imagen { get; set; }
         public virtual proyecto proyecto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<texto> texto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<video> video { get; set; }
     }
 }

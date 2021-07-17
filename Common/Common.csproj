@@ -42,15 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTransferObjects\DTOCategoria.cs" />
-    <Compile Include="DataTransferObjects\DTOVideo.cs" />
+    <Compile Include="DataTransferObjects\DTOProyectoCompleto.cs" />
     <Compile Include="DataTransferObjects\DTOValoracion.cs" />
-    <Compile Include="DataTransferObjects\DTOTexto.cs" />
-    <Compile Include="DataTransferObjects\DTOTagProyecto.cs" />
     <Compile Include="DataTransferObjects\DTOTag.cs" />
     <Compile Include="DataTransferObjects\DTOSigue.cs" />
     <Compile Include="DataTransferObjects\DTOSeccion.cs" />
     <Compile Include="DataTransferObjects\DTOMensaje.cs" />
-    <Compile Include="DataTransferObjects\DTOImagen.cs" />
     <Compile Include="DataTransferObjects\DTOComentario.cs" />
     <Compile Include="DataTransferObjects\DTOProyecto.cs" />
     <Compile Include="DataTransferObjects\DTOUsuario.cs" />

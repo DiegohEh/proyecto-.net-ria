@@ -7,9 +7,9 @@ using System.Configuration;
 using System.Data;
 using Dominio.General;
 using Common.DataTransferObjects;
-using TiendaShop.Services;
+using DesignProNamespace.Services;
 
-namespace TiendaShop.Models
+namespace DesignProNamespace.Models
 {
     public class ManejadorUsuario
     {
@@ -94,14 +94,12 @@ namespace TiendaShop.Models
         {
             UsuarioServices service = new UsuarioServices();
             return this.MapToUsuario(service.Get(id));
-
         }
 
         public void Update(Usuario usuario)
         {
             UsuarioServices service = new UsuarioServices();
             service.Update(this.MapToDto(usuario));
-
         }
 
         public void Remove(int id)

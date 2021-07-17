@@ -19,7 +19,10 @@ namespace Dominio.Mappers
             return new DTOSeccion()
             {
                 Id = seccion.id,
-                IdProyecto = seccion.idProyecto
+                IdProyecto = seccion.idProyecto,
+                contenidoTexto = seccion.contenidoTexto,
+                rutaUrlImagen = seccion.rutaUrlImagen,
+                rutaUrlVideo = seccion.rutaUrlVideo,
             };
         }
         public seccion MapToEntity(DTOSeccion seccion)
@@ -30,7 +33,10 @@ namespace Dominio.Mappers
             return new seccion()
             {
                 id = seccion.Id,
-                idProyecto = seccion.IdProyecto
+                idProyecto = seccion.IdProyecto,
+                contenidoTexto = seccion.contenidoTexto,
+                rutaUrlImagen = seccion.rutaUrlImagen,
+                rutaUrlVideo = seccion.rutaUrlVideo,
             };
         }
     }

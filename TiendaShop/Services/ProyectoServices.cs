@@ -5,19 +5,32 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace TiendaShop.Services
+namespace DesignProNamespace.Services
 {
     public class ProyectoServices
     {
-        public void Create(DTOProyecto proyecto)
+        public void Create(DTOProyecto proyecto, DTOTag tag, DTOSeccion sec)
         {
             string metodo = $"proyecto/Create";
-            var json = new JavaScriptSerializer().Serialize(proyecto);
             ApiService services = new ApiService();
+
+            var json = new JavaScriptSerializer().Serialize(proyecto);
+            var json2 = new JavaScriptSerializer().Serialize(tag);
+            var json3 = new JavaScriptSerializer().Serialize(sec);
+
             var response = services.PostServices(metodo, json);
-            if (!response.IsSuccessStatusCode)
+            var response2 = services.PostServices(metodo, json2);
+            var response3 = services.PostServices(metodo, json3);
+            
+            /*if (!response.IsSuccessStatusCode)
                 throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
 
+            if (!response2.IsSuccessStatusCode)
+                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+
+            if (!response3.IsSuccessStatusCode)
+                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+            */
             string jsonResponse = response.Content.ReadAsStringAsync().Result;
             DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
             if (!baseResponse.Success)
@@ -99,6 +112,27 @@ namespace TiendaShop.Services
             }
         }
 
+        public List<DTOProyecto> GetBarraDeBusqueda(string busqueda)
+        {
+            try
+            {
+                string metodo = $"proyecto/GetBarraDeBusqueda?busqueda={busqueda}";
+                ApiService services = new ApiService();
+                var response = services.GetServices(metodo);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+                }
+
+                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                return new JavaScriptSerializer().Deserialize < List<DTOProyecto>>(jsonResponse);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DTOProyecto Get(int id)
         {
             try
@@ -117,9 +151,27 @@ namespace TiendaShop.Services
             catch (Exception) { throw; }
         }
 
+        public DTOValoracion GetValoracionId(int id)
+        {
+            try
+            {
+                string metodo = $"proyecto/GetValoracion/{id}";
+                ApiService services = new ApiService();
+                var response = services.GetServices(metodo);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
+                }
+
+                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                return new JavaScriptSerializer().Deserialize<DTOValoracion>(jsonResponse);
+            }
+            catch (Exception) { throw; }
+        }
+
         public void Update(DTOProyecto proyecto)
         {
-            string metodo = $"proyecto/Update";
+            string metodo = $"Proyecto/Update";
             var json = new JavaScriptSerializer().Serialize(proyecto);
             ApiService services = new ApiService();
             var response = services.PostServices(metodo, json);
@@ -132,12 +184,10 @@ namespace TiendaShop.Services
                 throw new Exception(baseResponse.Error);
         }
 
-        //TODO ver si este servicio necesita un endpoint
-
-        /*public void UpdateVisitas(DTOProyecto proyecto)
+        public void UpdateValoraciones(DTOValoracion valoracion)
         {
-            string metodo = $"proyecto/UpdateVisitas";
-            var json = new JavaScriptSerializer().Serialize(proyecto);
+            string metodo = $"Proyecto/UpdateValoraciones";
+            var json = new JavaScriptSerializer().Serialize(valoracion);
             ApiService services = new ApiService();
             var response = services.PostServices(metodo, json);
             if (!response.IsSuccessStatusCode)
@@ -146,23 +196,7 @@ namespace TiendaShop.Services
             DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
             if (!baseResponse.Success)
                 throw new Exception(baseResponse.Error);
-        }*/
-
-        //TODO ver si este servicio necesita un endpoint
-
-        /*public void UpdateValoraciones(DTOProyecto proyecto)
-        {
-            string metodo = $"proyecto/UpdateValoraciones";
-            var json = new JavaScriptSerializer().Serialize(proyecto);
-            ApiService services = new ApiService();
-            var response = services.PostServices(metodo, json);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
-            string jsonResponse = response.Content.ReadAsStringAsync().Result;
-            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
-            if (!baseResponse.Success)
-                throw new Exception(baseResponse.Error);
-        }*/
+        }
 
         public void Remove(int id)
         {
@@ -170,74 +204,6 @@ namespace TiendaShop.Services
             var json = new JavaScriptSerializer().Serialize(id);
             ApiService services = new ApiService();
             var response = services.PostServices(metodo, json);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
-
-            string jsonResponse = response.Content.ReadAsStringAsync().Result;
-            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
-            if (!baseResponse.Success)
-                throw new Exception(baseResponse.Error);
-        }
-
-        public void CreateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
-        {
-            var list = new List<string>();
-            string metodo = $"proyecto/CreateSeccion";
-            var json = new JavaScriptSerializer().Serialize(dtoseccion);
-            var json1 = new JavaScriptSerializer().Serialize(dtoimagen);
-            var json2 = new JavaScriptSerializer().Serialize(dtotexto);
-            var json3 = new JavaScriptSerializer().Serialize(dtovideo);
-            list.Add(json);
-            list.Add(json1);
-            list.Add(json2);
-            list.Add(json3);
-            string result = string.Join(",", list);
-
-            ApiService services = new ApiService();
-            var response = services.PostServices(metodo, result);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
-
-            string jsonResponse = response.Content.ReadAsStringAsync().Result;
-            DTOBaseResponse baseResponse = new JavaScriptSerializer().Deserialize<DTOBaseResponse>(jsonResponse);
-            if (!baseResponse.Success)
-                throw new Exception(baseResponse.Error);
-        }
-
-        public DTOSeccion GetSeccion(int id)
-        {
-            try
-            {
-                string metodo = $"proyecto/GetSeccion/{id}";
-                ApiService services = new ApiService();
-                var response = services.GetServices(metodo);
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
-                }
-
-                string jsonResponse = response.Content.ReadAsStringAsync().Result;
-                return new JavaScriptSerializer().Deserialize<DTOSeccion>(jsonResponse);
-            }
-            catch (Exception) { throw; }
-        }
-
-        public void UpdateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
-        {
-            var list = new List<string>();
-            string metodo = $"proyecto/UpdateSeccion";
-            var json = new JavaScriptSerializer().Serialize(dtoseccion);
-            var json1 = new JavaScriptSerializer().Serialize(dtoimagen);
-            var json2 = new JavaScriptSerializer().Serialize(dtotexto);
-            var json3 = new JavaScriptSerializer().Serialize(dtovideo);
-            list.Add(json);
-            list.Add(json1);
-            list.Add(json2);
-            list.Add(json3);
-            string result = string.Join(",", list);
-
-            ApiService services = new ApiService();
-            var response = services.PostServices(metodo, result);
             if (!response.IsSuccessStatusCode)
                 throw new Exception($"Error, status: {response.StatusCode} - {response.ReasonPhrase} - {response.Content.ReadAsStringAsync()}");
 

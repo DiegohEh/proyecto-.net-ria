@@ -7,9 +7,9 @@ using System.Configuration;
 using System.Data;
 using Dominio.General;
 using Common.DataTransferObjects;
-using TiendaShop.Services;
+using DesignProNamespace.Services;
 
-namespace TiendaShop.Models
+namespace DesignProNamespace.Models
 {
     public class ManejadorMensaje
     {
@@ -46,7 +46,7 @@ namespace TiendaShop.Models
             service.Create(this.MapToDto(mensaje));
         }
 
-        /*public List<DTOMensaje> GetConversation(int id)
+        public List<Mensaje> GetConversation(int id)
         {
             MensajeServices service = new MensajeServices();
 
@@ -59,7 +59,7 @@ namespace TiendaShop.Models
                 resultados.Add(this.MapToMensaje(mensaje));
             }
             return resultados;
-        }*/
+        }
 
         public Mensaje Get(int id)
         {

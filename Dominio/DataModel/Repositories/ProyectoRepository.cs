@@ -20,9 +20,14 @@ namespace Dominio.Repositories
             this._context = context;
         }
 
-        public void Create(proyecto proyecto)
+        public void Create(proyecto pro, tag tag, seccion sec)
         {
-            this._context.proyecto.Add(proyecto);
+            AccesoBaseProyecto persistencia = new AccesoBaseProyecto();
+            persistencia.Create(pro,tag,sec);
+            /*this._context.proyecto.Add(proyecto);
+            this._context.tag.Add(tag);
+            this._context.categoria.Add(cat);
+            this._context.seccion.Add(sec);*/
         }
 
         public List<proyecto> GetAll()
@@ -30,14 +35,21 @@ namespace Dominio.Repositories
             return this._context.proyecto.Select(a => a).ToList();
         }
 
-        public List<proyecto> GetRecientes()
+        public List<proyecto> GetBarraDeBusqueda(string busqueda)
         {
-            return this._context.proyecto.Select(a => a).ToList();
-        }
+            AccesoBaseProyecto persistencia = new AccesoBaseProyecto();
+            List<proyecto> lista = new List<proyecto>();
+            lista = persistencia.GetBarraDeBusqueda(busqueda);
 
-        public List<proyecto> GetMayorValorado()
-        {
-            return this._context.proyecto.Select(a => a).ToList();
+            /*List<proyecto> lista = new List<proyecto>();
+
+            string[] recipients = busqueda.Split(' ');
+            foreach (string recipient in recipients)
+            {
+                lista.Add(persistencia.GetBarraDeBusqueda(recipient));
+            }*/
+
+            return lista;
         }
 
         public proyecto GetByTitulo(string titulo)
@@ -45,10 +57,14 @@ namespace Dominio.Repositories
             return this._context.proyecto.FirstOrDefault(a => a.titulo == titulo);
         }
 
+        public proyecto GetByIdUsuario(int idUsuario)
+        {
+            return this._context.proyecto.FirstOrDefault(a => a.idUsuario == idUsuario);
+        }
+
         public proyecto Get(int id)
         {
             return this._context.proyecto.FirstOrDefault(a => a.id == id);
-
         }
 
         public void Update(proyecto proyecto)
@@ -67,7 +83,7 @@ namespace Dominio.Repositories
         {
             var entity = this.Get(proyecto.id);
             entity.titulo = proyecto.titulo;
-            entity.visitas = proyecto.visitas;
+            entity.visitas = proyecto.visitas + 1;
             entity.rutaImgPortada = proyecto.rutaImgPortada;
             entity.promedioValoraciones = proyecto.promedioValoraciones;
             entity.fechaCreado = proyecto.fechaCreado;
@@ -91,34 +107,6 @@ namespace Dominio.Repositories
         {
             var entity = this.Get(id);
             this._context.proyecto.Remove(entity);
-
-            //LogAction(entity, LogActionsDb.Eliminacion);
-        }
-
-        public void CreateSeccion(seccion seccion, imagen imagen, texto texto, video video)
-        {
-            this._context.seccion.Add(seccion);
-            this._context.imagen.Add(imagen);
-            this._context.texto.Add(texto);
-            this._context.video.Add(video);
-        }
-
-        public seccion GetSeccion(int id)
-        {
-            return this._context.seccion.FirstOrDefault(a => a.id == id);
-        }
-
-        public void UpdateSeccion(seccion seccion, imagen imagen, texto texto, video video)
-        {
-            var entity = this.GetSeccion(seccion.id);
-
-            entity.idProyecto = seccion.idProyecto;
-            imagen.idSeccion = seccion.id;
-            imagen.rutaUrl = imagen.rutaUrl;
-            texto.idSeccion = seccion.id;
-            texto.contenido = texto.contenido;
-            video.idSeccion = seccion.id;
-            video.rutaUrl = video.rutaUrl;
         }
     }
 }

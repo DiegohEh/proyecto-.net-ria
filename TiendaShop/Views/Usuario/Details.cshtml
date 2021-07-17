@@ -1,0 +1,130 @@
+﻿@model DesignProNamespace.Models.Usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrasenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrasenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaNac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaNac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pais)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RutaImgPerfil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RutaImgPerfil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profesion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profesion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlSitioWebProfesional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlSitioWebProfesional)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitasTotales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitasTotales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PromedioValoraciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PromedioValoraciones)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

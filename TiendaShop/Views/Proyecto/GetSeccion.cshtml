@@ -1,0 +1,50 @@
+﻿@model DesignProNamespace.Models.Seccion
+
+@{
+    ViewBag.Title = "GetSeccion";
+}
+
+<h2>GetSeccion</h2>
+
+<div>
+    <h4>Seccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contenidoTexto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contenidoTexto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rutaUrlImagen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rutaUrlImagen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rutaUrlVideo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rutaUrlVideo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

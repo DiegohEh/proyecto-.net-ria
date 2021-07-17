@@ -40,7 +40,7 @@ namespace Dominio.General
         {
             using (var uow = new UnitOfWork())
             {
-                var lista = uow.ComentarioRepository.GetConversation(id);
+                var lista = uow.ComentarioRepository.GetByProyecto(id);
                 List<DTOComentario> resultado = new List<DTOComentario>();
                 foreach (var comentario in lista)
                 {

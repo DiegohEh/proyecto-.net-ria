@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 
-namespace TiendaShop.Services
+namespace DesignProNamespace.Services
 {
     public class ApiService
     {
@@ -15,7 +15,7 @@ namespace TiendaShop.Services
 
         public ApiService()
         {
-            _uri = ConfigurationManager.AppSettings["TIENDASHOP.ENDPOINT.INTERNAL"];
+            _uri = ConfigurationManager.AppSettings["DESIGNPRO.ENDPOINT.INTERNAL"];
         }
 
         public HttpResponseMessage PostServices(string method, string jsonData)
@@ -40,9 +40,9 @@ namespace TiendaShop.Services
                 var adress = new Uri($"{_uri}{method}");
                 return _client.GetAsync(adress).Result;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
     }

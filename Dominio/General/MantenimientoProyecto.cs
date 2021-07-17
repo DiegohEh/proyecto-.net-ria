@@ -15,21 +15,20 @@ namespace Dominio.General
     public class MantenimientoProyecto
     {
         private ProyectoMapper _mapper;
+        private ValoracionMapper _mapperValoracion;
         private SeccionMapper _mapperSeccion;
-        private ImagenMapper _mapperImagen;
-        private VideoMapper _mapperVideo;
-        private TextoMapper _mapperTexto;
+        private CategoriaMapper _mapperCategoria;
+        private TagMapper _mapperTag;
 
         public MantenimientoProyecto()
         {
             _mapper = new ProyectoMapper();
+            _mapperValoracion = new ValoracionMapper();
             _mapperSeccion = new SeccionMapper();
-            _mapperImagen = new ImagenMapper();
-            _mapperVideo = new VideoMapper();
-            _mapperTexto = new TextoMapper();
+            _mapperTag = new TagMapper();
         }
 
-        public void Create(DTOProyecto dtoProyecto)
+        public void Create(DTOProyecto dtoProyecto, DTOTag dtoTags, DTOSeccion dtoSeccion)
         {
             try
             {
@@ -37,18 +36,24 @@ namespace Dominio.General
                 {
 
                     var current = uow.ProyectoRepository.GetByTitulo(dtoProyecto.Titulo);
+                    var current1 = uow.ProyectoRepository.GetByIdUsuario(dtoProyecto.IdUsuario);
 
-                    if (current != null)
+                    if (current != null && current1 != null)
                         throw new Exception("Título del Proyecto existente.");
 
-                    var proyecto = _mapper.MapToEntity(dtoProyecto);
+                    var pr = _mapper.MapToEntity(dtoProyecto);
+                    var ta = _mapperTag.MapToEntity(dtoTags);
+                    var se = _mapperSeccion.MapToEntity(dtoSeccion);
 
-                    uow.ProyectoRepository.Create(proyecto);
+                    uow.ProyectoRepository.Create(pr, ta, se);
 
                     uow.SaveChanges();
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            { 
+                throw;
+            }
         }
 
         public List<DTOProyecto> GetAll()
@@ -65,25 +70,11 @@ namespace Dominio.General
             }
         }
 
-        public List<DTOProyecto> GetRecientes()
+        public List<DTOProyecto> GetBarraDeBusqueda(string busqueda)
         {
             using (var uow = new UnitOfWork())
             {
-                var lista = uow.ProyectoRepository.GetRecientes();
-                List<DTOProyecto> resultado = new List<DTOProyecto>();
-                foreach (var proyecto in lista)
-                {
-                    resultado.Add(_mapper.MapToObject(proyecto));
-                }
-                return resultado;
-            }
-        }
-
-        public List<DTOProyecto> GetMayorValorado()
-        {
-            using (var uow = new UnitOfWork())
-            {
-                var lista = uow.ProyectoRepository.GetMayorValorado();
+                var lista = uow.ProyectoRepository.GetBarraDeBusqueda(busqueda);
                 List<DTOProyecto> resultado = new List<DTOProyecto>();
                 foreach (var proyecto in lista)
                 {
@@ -120,7 +111,7 @@ namespace Dominio.General
                     uow.SaveChanges();
                 }
             }
-            catch (Exception){throw;}
+            catch (Exception) { throw; }
         }
         
         public void UpdateVisitas(DTOProyecto proyecto)
@@ -129,20 +120,20 @@ namespace Dominio.General
             {
                 using (var uow = new UnitOfWork())
                 {
-                    uow.ProyectoRepository.Update(_mapper.MapToEntity(proyecto));
+                    uow.ProyectoRepository.UpdateVisitas(_mapper.MapToEntity(proyecto));
                     uow.SaveChanges();
                 }
             }
             catch (Exception) { throw; }
         }
 
-        public void UpdateValoraciones(DTOProyecto proyecto)
+        public void UpdateValoraciones(DTOValoracion valoracion)
         {
             try
             {
                 using (var uow = new UnitOfWork())
                 {
-                    uow.ProyectoRepository.Update(_mapper.MapToEntity(proyecto));
+                    uow.ValoracionRepository.UpdateValoraciones(_mapperValoracion.MapToEntity(valoracion));
                     uow.SaveChanges();
                 }
             }
@@ -157,48 +148,6 @@ namespace Dominio.General
                 {
                     uow.ProyectoRepository.Remove(id);
 
-                    uow.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void CreateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
-        {
-            try
-            {
-                using (var uow = new UnitOfWork())
-                {
-                    var seccion = _mapperSeccion.MapToEntity(dtoseccion);
-                    var imagen = _mapperImagen.MapToEntity(dtoimagen);
-                    var texto = _mapperTexto.MapToEntity(dtotexto);
-                    var video = _mapperVideo.MapToEntity(dtovideo);
-
-                    uow.ProyectoRepository.CreateSeccion(seccion,imagen,texto,video);
-                    uow.SaveChanges();
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        public DTOSeccion GetSeccion(int id)
-        {
-            using (var uow = new UnitOfWork())
-            {
-                return _mapperSeccion.MapToObject(uow.ProyectoRepository.GetSeccion(id));
-            }
-        }
-
-        public void UpdateSeccion(DTOSeccion dtoseccion, DTOImagen dtoimagen, DTOTexto dtotexto, DTOVideo dtovideo)
-        {
-            try
-            {
-                using (var uow = new UnitOfWork())
-                {
-                    uow.ProyectoRepository.UpdateSeccion(_mapperSeccion.MapToEntity(dtoseccion), _mapperImagen.MapToEntity(dtoimagen), _mapperTexto.MapToEntity(dtotexto), _mapperVideo.MapToEntity(dtovideo));
                     uow.SaveChanges();
                 }
             }

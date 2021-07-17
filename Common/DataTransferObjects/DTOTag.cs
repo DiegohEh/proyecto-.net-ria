@@ -9,6 +9,7 @@ namespace Common.DataTransferObjects
     public class DTOTag
     {
         public int Id { get; set; }
+        public int? IdProyecto { get; set; }
         public string Nombre { get; set; }
     }
 }

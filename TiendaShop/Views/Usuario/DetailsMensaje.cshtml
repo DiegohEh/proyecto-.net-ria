@@ -1,0 +1,50 @@
+﻿@model DesignProNamespace.Models.Mensaje
+
+@{
+    ViewBag.Title = "DetailsMensaje";
+}
+
+<h2>DetailsMensaje</h2>
+
+<div>
+    <h4>Mensaje</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuarioEmisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUsuarioEmisor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuarioReceptor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUsuarioReceptor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contenido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contenido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Leido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Leido)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

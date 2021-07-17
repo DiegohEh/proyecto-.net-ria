@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TiendaShop.Models;
+using DesignProNamespace.Models;
 
-namespace TiendaShop.Controllers
+namespace DesignProNamespace.Controllers
 {
     public class UsuarioController : Controller
     {
-        // GET: Usuario
         public ActionResult Index()
         {
             ManejadorUsuario ma = new ManejadorUsuario();
             return View(ma.GetAll());
         }
 
-        // GET: Usuario/Details/5
+        public ActionResult GetConversation(int id)
+        {
+            ManejadorMensaje ma = new ManejadorMensaje();
+            return View(ma.GetConversation(id));
+        }
+
         public ActionResult Details(int id)
         {
             ManejadorUsuario ma = new ManejadorUsuario();
@@ -24,13 +28,18 @@ namespace TiendaShop.Controllers
             return View(art);
         }
 
-        // GET: Usuario/Create
+        public ActionResult DetailsMensaje(int id)
+        {
+            ManejadorMensaje ma = new ManejadorMensaje();
+            Mensaje art = ma.Get(id);
+            return View(art);
+        }
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuario/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -64,7 +73,35 @@ namespace TiendaShop.Controllers
             }
         }
 
-        // GET: Usuario/Edit/5
+        public ActionResult CreateMensaje()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateMensaje(FormCollection collection)
+        {
+            try
+            {
+                ManejadorMensaje ma = new ManejadorMensaje();
+                Mensaje art = new Mensaje()
+                {
+                    IdUsuarioEmisor = int.Parse(collection["idUsuarioEmisor"]),
+                    IdUsuarioReceptor = int.Parse(collection["idUsuarioReceptor"]),
+                    Contenido = collection["contenido"],
+                    Leido = Boolean.Parse(collection["leido"]),
+                };
+                ma.Create(art);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+                return View();
+            }
+        }
+
+
         public ActionResult Edit(int id)
         {
             ManejadorUsuario ma = new ManejadorUsuario();
@@ -72,7 +109,6 @@ namespace TiendaShop.Controllers
             return View(art);
         }
 
-        // POST: Usuario/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -107,7 +143,6 @@ namespace TiendaShop.Controllers
             }
         }
 
-        // GET: Usuario/Delete/5
         public ActionResult Delete(int id)
         {
             ManejadorUsuario ma = new ManejadorUsuario();
@@ -115,7 +150,6 @@ namespace TiendaShop.Controllers
             return View(art);
         }
 
-        // POST: Usuario/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

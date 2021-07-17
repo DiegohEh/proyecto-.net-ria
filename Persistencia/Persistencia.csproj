@@ -58,17 +58,14 @@
     <Compile Include="ADO.NET\AccesoBaseComentario.cs" />
     <Compile Include="ADO.NET\AccesoBaseUsuario.cs" />
     <Compile Include="ADO.NET\Constantes\LogAcciones.cs" />
-    <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaVideo.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaValoracion.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaUsuario.cs" />
-    <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaTexto.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaTagProyecto.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaTag.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaSigue.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaSeccion.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaProyecto.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaMensaje.cs" />
-    <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaImagen.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaComentario.cs" />
     <Compile Include="ADO.NET\DataTrasnferObjects\DTOPersistenciaCategoria.cs" />
     <Compile Include="Database\categoria.cs">
@@ -92,9 +89,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DesignProModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\imagen.cs">
-      <DependentUpon>DesignProModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\mensaje.cs">
       <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
@@ -116,16 +110,10 @@
     <Compile Include="Database\tag.cs">
       <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\texto.cs">
-      <DependentUpon>DesignProModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\usuario.cs">
       <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\valoracion.cs">
-      <DependentUpon>DesignProModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\video.cs">
       <DependentUpon>DesignProModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,7 +132,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\DesignProModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

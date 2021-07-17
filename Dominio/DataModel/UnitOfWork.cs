@@ -13,10 +13,12 @@ namespace Dominio.DataModel
         protected readonly designProEntities _context;
 
         private ProyectoRepository _proyectoRepository;
+        private ValoracionRepository _valoracionRepository;
         private UsuarioRepository _usuarioRepository;
         private MensajeRepository _mensajeRepository;
         private ComentarioRepository _comentarioRepository;
-        //private SeccionRepository _seccionRepository;
+        private SeccionRepository _seccionRepository;
+        private CategoriaRepository _categoriaRepository;
 
         public ProyectoRepository ProyectoRepository
         {
@@ -28,6 +30,29 @@ namespace Dominio.DataModel
                 return this._proyectoRepository;
             }
         }
+
+        public CategoriaRepository CategoriaRepository
+        {
+            get
+            {
+                if (this._categoriaRepository == null)
+                    this._categoriaRepository = new CategoriaRepository(this._context);
+
+                return this._categoriaRepository;
+            }
+        }
+
+        public ValoracionRepository ValoracionRepository
+        {
+            get
+            {
+                if (this._valoracionRepository == null)
+                    this._valoracionRepository = new ValoracionRepository(this._context);
+
+                return this._valoracionRepository;
+            }
+        }
+
         public UsuarioRepository UsuarioRepository
         {
             get
@@ -39,7 +64,7 @@ namespace Dominio.DataModel
             }
         }
 
-        /*public SeccionRepository SeccionRepository
+        public SeccionRepository SeccionRepository
         {
             get
             {
@@ -48,7 +73,7 @@ namespace Dominio.DataModel
 
                 return this._seccionRepository;
             }
-        }*/
+        }
 
         public ComentarioRepository ComentarioRepository
         {

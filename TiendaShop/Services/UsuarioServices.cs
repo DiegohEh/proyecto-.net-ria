@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace TiendaShop.Services
+namespace DesignProNamespace.Services
 {
     public class UsuarioServices
     {

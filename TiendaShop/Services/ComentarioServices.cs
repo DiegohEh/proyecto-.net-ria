@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace TiendaShop.Services
+namespace DesignProNamespace.Services
 {
     public class ComentarioServices
     {
@@ -28,7 +28,7 @@ namespace TiendaShop.Services
         {
             try
             {
-                string metodo = "comentario/GetByProyecto";
+                string metodo = $"comentario/GetByProyecto/{id}";
                 ApiService services = new ApiService();
                 var response = services.GetServices(metodo);
                 if (!response.IsSuccessStatusCode)
@@ -41,6 +41,7 @@ namespace TiendaShop.Services
             }
             catch (Exception) { throw; }
         }
+
         public DTOComentario Get(int id)
         {
             try

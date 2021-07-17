@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TiendaShop
+namespace DesignProNamespace
 {
     public class BundleConfig
     {

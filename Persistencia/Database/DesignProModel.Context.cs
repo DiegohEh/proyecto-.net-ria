@@ -29,15 +29,12 @@ namespace Persistencia.Database
     
         public virtual DbSet<categoria> categoria { get; set; }
         public virtual DbSet<comentario> comentario { get; set; }
-        public virtual DbSet<imagen> imagen { get; set; }
         public virtual DbSet<mensaje> mensaje { get; set; }
         public virtual DbSet<proyecto> proyecto { get; set; }
         public virtual DbSet<seccion> seccion { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tag> tag { get; set; }
-        public virtual DbSet<texto> texto { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
-        public virtual DbSet<video> video { get; set; }
         public virtual DbSet<valoracion> valoracion { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

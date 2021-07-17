@@ -25,7 +25,7 @@ namespace Dominio.Repositories
             this._context.comentario.Add(comentario);
         }
 
-        public List<comentario> GetConversation(int id)
+        public List<comentario> GetByProyecto(int id)
         {
             return this._context.comentario.Select(a => a).ToList();
         }

@@ -8,72 +8,102 @@ using Persistencia.ADO.NET.DataTrasnferObjects;
 using System.Data;
 using System.Data.SqlClient;
 using Persistencia.ADO.NET.Constantes;
+using Persistencia.Database;
+
 
 namespace Persistencia.ADO.NET
 {
     public class AccesoBaseProyecto : AccesoBase
     {
-        public int Create(DTOPersistenciaProyecto proyecto)
+        public int Create(proyecto pro, tag tag, seccion sec)
         {
             try
             {
                 string sql = "insert into proyecto(titulo, visitas, rutaImgPortada, promedioValoraciones, fechaCreado, idCategoria, idUsuario)"
-                + " output INSERTED.id"
-                + " values (@titulo, @visitas, @rutaImgPortada, @promedioValoraciones, @fechaCreado, @idCategoria, @idUsuario)";
+                + " values (@titulo, @visitas, @rutaImgPortada, @promedioValoraciones, @fechaCreado, @idCategoria, @idUsuario);"
+                + "insert into tag(idProyecto, nombre)"
+                + "values((select MAX(id) from proyecto), @nombre);"
+                + "insert into seccion(idProyecto, contenidoTexto, rutaUrlImagen, rutaUrlVideo)"
+                + "values((select MAX(id) from proyecto), @contenidoTexto, @rutaUrlImagen, @rutaUrlVideo);";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@titulo",
                     SqlDbType = SqlDbType.VarChar,
-                    Value = proyecto.Titulo
+                    Value = pro.titulo
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@visitas",
                     SqlDbType = SqlDbType.Int,
-                    Value = 0
+                    Value = 0,
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@rutaImgPortada",
                     SqlDbType = SqlDbType.Text,
-                    Value = proyecto.RutaImgPortada
+                    Value = pro.rutaImgPortada
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@promedioValoraciones",
                     SqlDbType = SqlDbType.Float,
-                    Value = 0
+                    Value = 0,
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@fechaCreado",
                     SqlDbType = SqlDbType.DateTime,
-                    Value = proyecto.FechaCreado
+                    Value = DateTime.Now
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@idCategoria",
                     SqlDbType = SqlDbType.Int,
-                    Value = proyecto.IdCategoria
+                    Value = pro.idCategoria
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@idUsuario",
                     SqlDbType = SqlDbType.Int,
-                    Value = proyecto.IdUsuario
+                    Value = pro.idUsuario
                 });
+                ////////////////////////////////
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@nombre",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = tag.nombre
+                });
+                ////////////////////////////////
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@contenidoTexto",
+                    SqlDbType = SqlDbType.Text,
+                    Value = sec.contenidoTexto
+                });
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@rutaUrlImagen",
+                    SqlDbType = SqlDbType.Text,
+                    Value = sec.rutaUrlImagen
+                });
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@rutaUrlVideo",
+                    SqlDbType = SqlDbType.Text,
+                    Value = sec.rutaUrlVideo
+                });
+
                 this.OpenConnetion();
                 command.Transaction = this.GetTransaction();
-                proyecto.Id = (int)this.ExecuteScalar(command);
-                //int result = this.InsertLog(proyecto, LogAcciones.Alta);
+                pro.id = (int)this.ExecuteScalar(command);
                 this.CommitTransaction();
                 this.CloseConnection();
-                //Retorna el result envez
                 return this.ExecuteNonQuery(command);
             }
-            catch (Exception){throw;}
+            catch (Exception) { throw; }
         }
 
         public List<DTOPersistenciaProyecto> GetAll()
@@ -101,50 +131,26 @@ namespace Persistencia.ADO.NET
             return proyectos;
         }
 
-        public List<DTOPersistenciaProyecto> GetRecientes()
+        public List<proyecto> GetBarraDeBusqueda(string busqueda)
         {
-            List<DTOPersistenciaProyecto> proyectos = new List<DTOPersistenciaProyecto>();
-            string sql = "select * from proyecto ORDER BY fechaCreado DESC";
+            List<proyecto> proyectos = new List<proyecto>();
+            string sql = "select proyecto.titulo,proyecto.visitas,proyecto.rutaImgPortada,proyecto.promedioValoraciones,proyecto.fechaCreado" +
+                " from ( ( proyecto " +
+                " join tag on tag.id = proyecto.id) " +
+                " join categoria on categoria.id = proyecto.idCategoria)" +
+                " where proyecto.titulo like '%" + busqueda + "%' or tag.nombre like '" + busqueda + "' or categoria.nombre like '" + busqueda + "';";
             SqlCommand command = new SqlCommand(sql);
             this.OpenConnetion();
             SqlDataReader dataReader = this.ExecuteReader(command);
             while (dataReader.Read())
             {
-                proyectos.Add(new DTOPersistenciaProyecto()
+                proyectos.Add(new proyecto()
                 {
-                    Id = int.Parse(dataReader["id"].ToString()),
-                    Titulo = dataReader["titulo"].ToString(),
-                    Visitas = int.Parse(dataReader["visitas"].ToString()),
-                    RutaImgPortada = dataReader["rutaImgPortada"].ToString(),
-                    PromedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString()),
-                    FechaCreado = DateTime.Parse(dataReader["fechaCreado"].ToString()),
-                    IdCategoria = int.Parse(dataReader["idCategoria"].ToString()),
-                    IdUsuario = int.Parse(dataReader["idUsuario"].ToString()),
-                });
-            }
-            this.CloseConnection();
-            return proyectos;
-        }
-
-        public List<DTOPersistenciaProyecto> GetMayorValorado()
-        {
-            List<DTOPersistenciaProyecto> proyectos = new List<DTOPersistenciaProyecto>();
-            string sql = "select * from proyecto ORDER BY promedioValoraciones DESC";
-            SqlCommand command = new SqlCommand(sql);
-            this.OpenConnetion();
-            SqlDataReader dataReader = this.ExecuteReader(command);
-            while (dataReader.Read())
-            {
-                proyectos.Add(new DTOPersistenciaProyecto()
-                {
-                    Id = int.Parse(dataReader["id"].ToString()),
-                    Titulo = dataReader["titulo"].ToString(),
-                    Visitas = int.Parse(dataReader["visitas"].ToString()),
-                    RutaImgPortada = dataReader["rutaImgPortada"].ToString(),
-                    PromedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString()),
-                    FechaCreado = DateTime.Parse(dataReader["fechaCreado"].ToString()),
-                    IdCategoria = int.Parse(dataReader["idCategoria"].ToString()),
-                    IdUsuario = int.Parse(dataReader["idUsuario"].ToString()),
+                    titulo = dataReader["titulo"].ToString(),
+                    visitas = int.Parse(dataReader["visitas"].ToString()),
+                    rutaImgPortada = dataReader["rutaImgPortada"].ToString(),
+                    promedioValoraciones = float.Parse(dataReader["promedioValoraciones"].ToString()),
+                    fechaCreado = DateTime.Parse(dataReader["fechaCreado"].ToString()),
                 });
             }
             this.CloseConnection();
@@ -153,7 +159,8 @@ namespace Persistencia.ADO.NET
 
         public DTOPersistenciaProyecto GetByTitulo(string titulo)
         {
-            string sql = "select * from proyecto where titulo = @titulo";
+            string sql = "update proyecto set visitas = visitas+1 where titulo = @titulo;"
+                + "select * from proyecto where titulo = @titulo;";
             SqlCommand command = new SqlCommand(sql);
             command.Parameters.Add(new SqlParameter()
             {
@@ -182,7 +189,8 @@ namespace Persistencia.ADO.NET
 
         public DTOPersistenciaProyecto Get(int id)
         {
-            string sql = "select * from proyecto where id = @id";
+            string sql = "update proyecto set visitas = visitas + 1 where id = @id;"
+                + "select * from proyecto where id = @id;";
             SqlCommand command = new SqlCommand(sql);
 
             command.Parameters.Add(new SqlParameter()
@@ -274,12 +282,31 @@ namespace Persistencia.ADO.NET
             catch (Exception) { throw; }
         }
 
-        public int UpdateValoraciones(DTOPersistenciaProyecto proyecto)
+        public int UpdateValoraciones(DTOPersistenciaProyecto proyecto, DTOPersistenciaValoracion valoracion)
         {
             try
             {
-                string sql = "update proyecto set promedioValoraciones=(select sum(valoracion) from valoracion where idProyecto = " + proyecto.Id + ") / (select count(valoracion) from valoracion where idProyecto = " + proyecto.Id + ") where id = " + proyecto.Id;
+                string sql = "update valoracion set valor = @valor where idProyecto = @id;"
+                    + "update proyecto set promedioValoraciones=(select sum(valoracion) from valoracion where idProyecto = @id) / (select count(valoracion) from valoracion where idProyecto = @id) where id = @id";
                 SqlCommand command = new SqlCommand(sql);
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@id",
+                    SqlDbType = SqlDbType.Int,
+                    Value = proyecto.Id
+                });
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@promedioValoraciones",
+                    SqlDbType = SqlDbType.Float,
+                    Value = proyecto.PromedioValoraciones
+                });
+                command.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@valor",
+                    SqlDbType = SqlDbType.Float,
+                    Value = valoracion.Valor
+                });
                 this.OpenConnetion();
                 command.Transaction = this.GetTransaction();
                 int result = this.ExecuteNonQuery(command);
@@ -295,7 +322,8 @@ namespace Persistencia.ADO.NET
             try
             {
                 var proyecto = this.Get(id);
-                string sql = "delete from proyecto where id = @id";
+                string sql = "delete from seccion where idProyecto = @id;" +
+                    "delete from proyecto where id = @id";
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
                 {

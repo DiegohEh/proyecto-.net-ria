@@ -21,14 +21,6 @@
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="contenido" Type="text" />
         </EntityType>
-        <EntityType Name="imagen">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idSeccion" Type="int" />
-          <Property Name="rutaUrl" Type="text" />
-        </EntityType>
         <EntityType Name="mensaje">
           <Key>
             <PropertyRef Name="id" />
@@ -58,6 +50,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idProyecto" Type="int" />
+          <Property Name="contenidoTexto" Type="text" />
+          <Property Name="rutaUrlImagen" Type="text" />
+          <Property Name="rutaUrlVideo" Type="text" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'designPro.dbo.sigue' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -80,26 +75,14 @@ warning 6013: The table/view 'designPro.dbo.sigue' does not have a primary key d
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProyecto" Type="int" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'designPro.dbo.tagProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tagProyecto">
-          <Key>
-            <PropertyRef Name="idTag" />
-            <PropertyRef Name="idProyecto" />
-          </Key>
-          <Property Name="idTag" Type="int" Nullable="false" />
-          <Property Name="idProyecto" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="texto">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idSeccion" Type="int" Nullable="false" />
-          <Property Name="contenido" Type="text" />
-        </EntityType>
+warning 6013: The table/view 'designPro.dbo.temp_tableProyecto' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="temp_tableProyecto">
+          <Property Name="id" Type="int" />
+        </EntityType>-->
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id" />
@@ -131,14 +114,6 @@ warning 6002: The table/view 'designPro.dbo.valoracion' does not have a primary 
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="valoracion" Type="float" />
         </EntityType>
-        <EntityType Name="video">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idSeccion" Type="int" />
-          <Property Name="rutaUrl" Type="text" />
-        </EntityType>
         <Association Name="FK_comentario_proyecto">
           <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
           <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
@@ -160,18 +135,6 @@ warning 6002: The table/view 'designPro.dbo.valoracion' does not have a primary 
             </Principal>
             <Dependent Role="comentario">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_imagen_seccion">
-          <End Role="seccion" Type="Self.seccion" Multiplicity="0..1" />
-          <End Role="imagen" Type="Self.imagen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="imagen">
-              <PropertyRef Name="idSeccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,39 +204,15 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
         <!--Errors Found During Generation:
 error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but cannot be found.
         <Association Name="FK_sigue_usuario1" />-->
-        <Association Name="FK_tagProyecto_proyecto">
-          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
-          <End Role="tagProyecto" Type="Self.tagProyecto" Multiplicity="*" />
+        <Association Name="FK_tag_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="0..1" />
+          <End Role="tag" Type="Self.tag" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="proyecto">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="tagProyecto">
+            <Dependent Role="tag">
               <PropertyRef Name="idProyecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tagProyecto_tag">
-          <End Role="tag" Type="Self.tag" Multiplicity="1" />
-          <End Role="tagProyecto" Type="Self.tagProyecto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tag">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tagProyecto">
-              <PropertyRef Name="idTag" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_texto_seccion">
-          <End Role="seccion" Type="Self.seccion" Multiplicity="1" />
-          <End Role="texto" Type="Self.texto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="texto">
-              <PropertyRef Name="idSeccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -298,18 +237,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             </Principal>
             <Dependent Role="valoracion">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_video_seccion">
-          <End Role="seccion" Type="Self.seccion" Multiplicity="0..1" />
-          <End Role="video" Type="Self.video" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="video">
-              <PropertyRef Name="idSeccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -347,21 +274,12 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
         <EntityContainer Name="designProModelStoreContainer">
           <EntitySet Name="categoria" EntityType="Self.categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comentario" EntityType="Self.comentario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="imagen" EntityType="Self.imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mensaje" EntityType="Self.mensaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proyecto" EntityType="Self.proyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="seccion" EntityType="Self.seccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tag" EntityType="Self.tag" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="texto" EntityType="Self.texto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="video" EntityType="Self.video" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tagProyecto" EntityType="Self.tagProyecto" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tagProyecto].[idTag] AS [idTag], 
-    [tagProyecto].[idProyecto] AS [idProyecto]
-    FROM [dbo].[tagProyecto] AS [tagProyecto]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="valoracion" EntityType="Self.valoracion" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [valoracion].[idProyecto] AS [idProyecto], 
@@ -376,10 +294,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <AssociationSet Name="FK_comentario_usuario" Association="Self.FK_comentario_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="comentario" EntitySet="comentario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_imagen_seccion" Association="Self.FK_imagen_seccion">
-            <End Role="seccion" EntitySet="seccion" />
-            <End Role="imagen" EntitySet="imagen" />
           </AssociationSet>
           <AssociationSet Name="FK_mensaje_usuario" Association="Self.FK_mensaje_usuario">
             <End Role="usuario" EntitySet="usuario" />
@@ -401,17 +315,9 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="seccion" EntitySet="seccion" />
           </AssociationSet>
-          <AssociationSet Name="FK_tagProyecto_proyecto" Association="Self.FK_tagProyecto_proyecto">
+          <AssociationSet Name="FK_tag_proyecto" Association="Self.FK_tag_proyecto">
             <End Role="proyecto" EntitySet="proyecto" />
-            <End Role="tagProyecto" EntitySet="tagProyecto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tagProyecto_tag" Association="Self.FK_tagProyecto_tag">
             <End Role="tag" EntitySet="tag" />
-            <End Role="tagProyecto" EntitySet="tagProyecto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_texto_seccion" Association="Self.FK_texto_seccion">
-            <End Role="seccion" EntitySet="seccion" />
-            <End Role="texto" EntitySet="texto" />
           </AssociationSet>
           <AssociationSet Name="FK_valoracion_proyecto" Association="Self.FK_valoracion_proyecto">
             <End Role="proyecto" EntitySet="proyecto" />
@@ -420,10 +326,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <AssociationSet Name="FK_valoracion_usuario" Association="Self.FK_valoracion_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="valoracion" EntitySet="valoracion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_video_seccion" Association="Self.FK_video_seccion">
-            <End Role="seccion" EntitySet="seccion" />
-            <End Role="video" EntitySet="video" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -449,15 +351,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="proyecto" Relationship="Self.FK_comentario_proyecto" FromRole="comentario" ToRole="proyecto" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_comentario_usuario" FromRole="comentario" ToRole="usuario" />
-        </EntityType>
-        <EntityType Name="imagen">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idSeccion" Type="Int32" />
-          <Property Name="rutaUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="seccion" Relationship="Self.FK_imagen_seccion" FromRole="imagen" ToRole="seccion" />
         </EntityType>
         <EntityType Name="mensaje">
           <Key>
@@ -487,8 +380,8 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <NavigationProperty Name="comentario" Relationship="Self.FK_comentario_proyecto" FromRole="proyecto" ToRole="comentario" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_proyecto_usuario" FromRole="proyecto" ToRole="usuario" />
           <NavigationProperty Name="seccion" Relationship="Self.FK_seccion_proyecto" FromRole="proyecto" ToRole="seccion" />
+          <NavigationProperty Name="tag" Relationship="Self.FK_tag_proyecto" FromRole="proyecto" ToRole="tag" />
           <NavigationProperty Name="valoracion" Relationship="Self.FK_valoracion_proyecto" FromRole="proyecto" ToRole="valoracion" />
-          <NavigationProperty Name="tag" Relationship="Self.tagProyecto" FromRole="proyecto" ToRole="tag" />
         </EntityType>
         <EntityType Name="seccion">
           <Key>
@@ -496,10 +389,10 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProyecto" Type="Int32" />
-          <NavigationProperty Name="imagen" Relationship="Self.FK_imagen_seccion" FromRole="seccion" ToRole="imagen" />
+          <Property Name="contenidoTexto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rutaUrlImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rutaUrlVideo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="proyecto" Relationship="Self.FK_seccion_proyecto" FromRole="seccion" ToRole="proyecto" />
-          <NavigationProperty Name="texto" Relationship="Self.FK_texto_seccion" FromRole="seccion" ToRole="texto" />
-          <NavigationProperty Name="video" Relationship="Self.FK_video_seccion" FromRole="seccion" ToRole="video" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -516,17 +409,9 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProyecto" Type="Int32" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="proyecto" Relationship="Self.tagProyecto" FromRole="tag" ToRole="proyecto" />
-        </EntityType>
-        <EntityType Name="texto">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idSeccion" Type="Int32" Nullable="false" />
-          <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="seccion" Relationship="Self.FK_texto_seccion" FromRole="texto" ToRole="seccion" />
+          <NavigationProperty Name="proyecto" Relationship="Self.FK_tag_proyecto" FromRole="tag" ToRole="proyecto" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -552,15 +437,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <NavigationProperty Name="mensaje1" Relationship="Self.FK_mensaje_usuario1" FromRole="usuario" ToRole="mensaje" />
           <NavigationProperty Name="proyecto" Relationship="Self.FK_proyecto_usuario" FromRole="usuario" ToRole="proyecto" />
           <NavigationProperty Name="valoracion" Relationship="Self.FK_valoracion_usuario" FromRole="usuario" ToRole="valoracion" />
-        </EntityType>
-        <EntityType Name="video">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idSeccion" Type="Int32" />
-          <Property Name="rutaUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="seccion" Relationship="Self.FK_video_seccion" FromRole="video" ToRole="seccion" />
         </EntityType>
         <EntityType Name="valoracion">
           <Key>
@@ -606,18 +482,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             </Principal>
             <Dependent Role="comentario">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_imagen_seccion">
-          <End Role="seccion" Type="Self.seccion" Multiplicity="0..1" />
-          <End Role="imagen" Type="Self.imagen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="imagen">
-              <PropertyRef Name="idSeccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -669,6 +533,18 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tag_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="0..1" />
+          <End Role="tag" Type="Self.tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tag">
+              <PropertyRef Name="idProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_valoracion_proyecto">
           <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
           <End Role="valoracion" Type="Self.valoracion" Multiplicity="*" />
@@ -678,30 +554,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             </Principal>
             <Dependent Role="valoracion">
               <PropertyRef Name="idProyecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_texto_seccion">
-          <End Role="seccion" Type="Self.seccion" Multiplicity="1" />
-          <End Role="texto" Type="Self.texto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="texto">
-              <PropertyRef Name="idSeccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_video_seccion">
-          <End Role="seccion" Type="Self.seccion" Multiplicity="0..1" />
-          <End Role="video" Type="Self.video" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="video">
-              <PropertyRef Name="idSeccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -717,22 +569,15 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="tagProyecto">
-          <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
-          <End Role="tag" Type="Self.tag" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="designProEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="categoria" EntityType="Self.categoria" />
           <EntitySet Name="comentario" EntityType="Self.comentario" />
-          <EntitySet Name="imagen" EntityType="Self.imagen" />
           <EntitySet Name="mensaje" EntityType="Self.mensaje" />
           <EntitySet Name="proyecto" EntityType="Self.proyecto" />
           <EntitySet Name="seccion" EntityType="Self.seccion" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tag" EntityType="Self.tag" />
-          <EntitySet Name="texto" EntityType="Self.texto" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
-          <EntitySet Name="video" EntityType="Self.video" />
           <EntitySet Name="valoracion" EntityType="Self.valoracion" />
           <AssociationSet Name="FK_proyecto_categoria" Association="Self.FK_proyecto_categoria">
             <End Role="categoria" EntitySet="categoria" />
@@ -745,10 +590,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
           <AssociationSet Name="FK_comentario_usuario" Association="Self.FK_comentario_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="comentario" EntitySet="comentario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_imagen_seccion" Association="Self.FK_imagen_seccion">
-            <End Role="seccion" EntitySet="seccion" />
-            <End Role="imagen" EntitySet="imagen" />
           </AssociationSet>
           <AssociationSet Name="FK_mensaje_usuario" Association="Self.FK_mensaje_usuario">
             <End Role="usuario" EntitySet="usuario" />
@@ -766,25 +607,17 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="seccion" EntitySet="seccion" />
           </AssociationSet>
+          <AssociationSet Name="FK_tag_proyecto" Association="Self.FK_tag_proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="tag" EntitySet="tag" />
+          </AssociationSet>
           <AssociationSet Name="FK_valoracion_proyecto" Association="Self.FK_valoracion_proyecto">
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="valoracion" EntitySet="valoracion" />
           </AssociationSet>
-          <AssociationSet Name="FK_texto_seccion" Association="Self.FK_texto_seccion">
-            <End Role="seccion" EntitySet="seccion" />
-            <End Role="texto" EntitySet="texto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_video_seccion" Association="Self.FK_video_seccion">
-            <End Role="seccion" EntitySet="seccion" />
-            <End Role="video" EntitySet="video" />
-          </AssociationSet>
           <AssociationSet Name="FK_valoracion_usuario" Association="Self.FK_valoracion_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="valoracion" EntitySet="valoracion" />
-          </AssociationSet>
-          <AssociationSet Name="tagProyecto" Association="Self.tagProyecto">
-            <End Role="proyecto" EntitySet="proyecto" />
-            <End Role="tag" EntitySet="tag" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -852,15 +685,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="imagen">
-            <EntityTypeMapping TypeName="designProModel.imagen">
-              <MappingFragment StoreEntitySet="imagen">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
-                <ScalarProperty Name="rutaUrl" ColumnName="rutaUrl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="mensaje">
             <EntityTypeMapping TypeName="designProModel.mensaje">
               <MappingFragment StoreEntitySet="mensaje">
@@ -891,6 +715,9 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
               <MappingFragment StoreEntitySet="seccion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idProyecto" ColumnName="idProyecto" />
+                <ScalarProperty Name="contenidoTexto" ColumnName="contenidoTexto" />
+                <ScalarProperty Name="rutaUrlImagen" ColumnName="rutaUrlImagen" />
+                <ScalarProperty Name="rutaUrlVideo" ColumnName="rutaUrlVideo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -909,16 +736,8 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
             <EntityTypeMapping TypeName="designProModel.tag">
               <MappingFragment StoreEntitySet="tag">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idProyecto" ColumnName="idProyecto" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="texto">
-            <EntityTypeMapping TypeName="designProModel.texto">
-              <MappingFragment StoreEntitySet="texto">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
-                <ScalarProperty Name="contenido" ColumnName="contenido" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -943,15 +762,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="video">
-            <EntityTypeMapping TypeName="designProModel.video">
-              <MappingFragment StoreEntitySet="video">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
-                <ScalarProperty Name="rutaUrl" ColumnName="rutaUrl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="valoracion">
             <EntityTypeMapping TypeName="designProModel.valoracion">
               <MappingFragment StoreEntitySet="valoracion">
@@ -961,14 +771,6 @@ error 6004: The table 'designPro.dbo.sigue' is referenced by a relationship, but
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="tagProyecto" TypeName="designProModel.tagProyecto" StoreEntitySet="tagProyecto">
-            <EndProperty Name="proyecto">
-              <ScalarProperty Name="id" ColumnName="idProyecto" />
-            </EndProperty>
-            <EndProperty Name="tag">
-              <ScalarProperty Name="id" ColumnName="idTag" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="designProModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="designProModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="designProModel.Store.sp_dropdiagram" />

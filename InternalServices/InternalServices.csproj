@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ComentarioController.cs" />
+    <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
     <Compile Include="Controllers\MensajeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -149,7 +150,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58559</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44360/</IISUrl>
+          <IISUrl>https://localhost:44378/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

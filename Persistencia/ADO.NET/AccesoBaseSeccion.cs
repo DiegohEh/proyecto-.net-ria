@@ -13,14 +13,11 @@ namespace Persistencia.ADO.NET
 {
     public class AccesoBaseSeccion : AccesoBase
     {
-        public int CreateSeccion(DTOPersistenciaSeccion seccion, DTOPersistenciaImagen imagen, DTOPersistenciaTexto texto, DTOPersistenciaVideo video)
+        public int CreateSeccion(DTOPersistenciaSeccion seccion)
         {
             try
             {
-                string sql = "insert into seccion(idProyecto) values (@idProyecto);"
-                           + "insert into imagen(idSeccion, rutaUrl) values ((select IDENT_CURRENT('seccion')), @rutaUrl);"
-                           + "insert into texto(idSeccion, contenido) values ((select IDENT_CURRENT('seccion')), @contenido);"
-                           + "insert into video(idSeccion, rutaUrl) values ((select IDENT_CURRENT('seccion')), @rutaUrl);";
+                string sql = "insert into seccion(idProyecto,contenidoTexto,rutaUrlImagen,rutaUrlVideo) values (@idProyecto,@contenidoTexto,@rutaUrlImagen,@rutaUrlVideo)";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
@@ -31,21 +28,21 @@ namespace Persistencia.ADO.NET
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@rutaUrl",
+                    ParameterName = "@contenidoTexto",
                     SqlDbType = SqlDbType.Text,
-                    Value = imagen.RutaUrl
+                    Value = seccion.contenidoTexto
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@contenido",
+                    ParameterName = "@rutaUrlImagen",
                     SqlDbType = SqlDbType.Text,
-                    Value = texto.Contenido
+                    Value = seccion.rutaUrlImagen
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@rutaUrl",
+                    ParameterName = "@rutaUrlVideo",
                     SqlDbType = SqlDbType.Text,
-                    Value = video.RutaUrl
+                    Value = seccion.rutaUrlVideo
                 });
 
                 this.OpenConnetion();
@@ -55,7 +52,7 @@ namespace Persistencia.ADO.NET
                 this.CloseConnection();
                 return this.ExecuteNonQuery(command);
             }
-            catch (Exception){throw;}
+            catch (Exception) { throw; }
         }
 
         public DTOPersistenciaSeccion GetSeccion(int id)
@@ -80,13 +77,14 @@ namespace Persistencia.ADO.NET
             return seccions;
         }
 
-        public int UpdateSeccion(DTOPersistenciaSeccion seccion, DTOPersistenciaImagen imagen, DTOPersistenciaTexto texto, DTOPersistenciaVideo video)
+        public int UpdateSeccion(DTOPersistenciaSeccion seccion)
         {
             try
             {
-                string sql = "update imagen set rutaUrl = @rutaUrl where idSeccion = @id;" +
-                    "update texto set contenido = @contenido where idSeccion = @id;" +
-                    "update video set rutaUrl = @rutaUrl where idSeccion = @id;";
+                string sql = "update seccion set contenidoTexto = @contenidoTexto," +
+                    " rutaUrlImagen = @rutaUrlImagen," +
+                    " rutaUrlVideo = @rutaUrlVideo" +
+                    " where idSeccion = @id;";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.Add(new SqlParameter()
@@ -97,21 +95,21 @@ namespace Persistencia.ADO.NET
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@rutaUrl",
+                    ParameterName = "@contenidoTexto",
                     SqlDbType = SqlDbType.Text,
-                    Value = imagen.RutaUrl
+                    Value = seccion.contenidoTexto
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@contenido",
+                    ParameterName = "@rutaUrlImagen",
                     SqlDbType = SqlDbType.Text,
-                    Value = texto.Contenido
+                    Value = seccion.rutaUrlImagen
                 });
                 command.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@rutaUrl",
+                    ParameterName = "@rutaUrlVideo",
                     SqlDbType = SqlDbType.Text,
-                    Value = video.RutaUrl
+                    Value = seccion.rutaUrlVideo
                 });
                 this.OpenConnetion();
                 command.Transaction = this.GetTransaction();
